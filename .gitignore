@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # DB and data files
-.db
-.db-shm
-.db-wal
-.csv
+*.db
+*.db-shm
+*.db-wal
+*.csv
