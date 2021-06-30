@@ -29,10 +29,6 @@
         <div id="loading">
         </div>
 
-        {# <div class="panel-heading">
-            DataTables Advanced Tables
-        </div>
-        <!-- /.panel-heading --> #}
             <div class="panel-body">
 
                 <div class="container" style="margin-left: 25px;margin-bottom: 25px;">
@@ -81,19 +77,8 @@
 
 
    <!-- DataTables JavaScript -->
-   <script src={{url_for('static', filename="vendor/datatables/js/jquery.dataTables.js")}}></script>
-   <script src={{url_for('static', filename="vendor/datatables-plugins/dataTables.bootstrap.js")}}></script>
-   <script src={{url_for('static', filename="vendor/datatables-responsive/dataTables.responsive.js")}}></script>
-
-   <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-   <script>
-   function SetUpTable() {
-      $('#example_table').DataTable({
-         responsive: true,
-         retrieve: true,
-         bDestroy: true
-      });
-   };
-   </script>
+   <script src={{url_for('static', filename="vendor/DataTables-1.10.25/js/jquery.dataTables.js")}}></script>
+   {# <script src={{url_for('static', filename="vendor/datatables-plugins/dataTables.bootstrap.js")}}></script> #}
+   <script src={{url_for('static', filename="vendor/Responsive-2.2.9/js/dataTables.responsive.js")}}></script>
 
 {% endblock %}

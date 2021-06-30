@@ -7,7 +7,7 @@ from pprint import PrettyPrinter
 
 pp = PrettyPrinter()
 
-import chameleon_extact as cham_extr
+from . import chameleon_extact
 
 
 def parse_args():
@@ -65,7 +65,7 @@ class Chamelogator:
 
         self.df = None
 
-        self.extr = cham_extr.ChameleonExtract()
+        self.extr = chameleon_extact.ChameleonExtract()
 
     def fetch_df(self):
 

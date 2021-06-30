@@ -15,8 +15,15 @@ app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 # import other parts of the app
 # (Must be done after creating app due to circular imports)
-from blueprints.plots import plots
-from blueprints.data import data
+from .blueprints.plots import plots
+from .blueprints.data import data
+
+from Chamelogator.scripts import chamelogator
+
+cham = chamelogator.Chamelogator()
+cham.fetch_df()
+
+app.cham = cham
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
