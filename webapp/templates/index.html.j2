@@ -1,0 +1,99 @@
+{% extends "base.html.j2" %}
+
+{% block heading %}Hello World!{% endblock %}
+
+{% block content %}
+	<div class="col-lg-2">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+		{% for category, message in messages %}
+		<p class="alert-{{ category }}">{{ message }}</p>
+		{% endfor %}
+	{% endwith %}
+
+        <div class="panel panel-default">
+			<div class="panel-heading">
+            Heading
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+
+
+
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+
+        <div id="loading">
+        </div>
+
+        {# <div class="panel-heading">
+            DataTables Advanced Tables
+        </div>
+        <!-- /.panel-heading --> #}
+            <div class="panel-body">
+
+                <div class="container" style="margin-left: 25px;margin-bottom: 25px;">
+                    <div class="row">
+                        <h3>Project Name Search</h3>
+                        <div id="custom-search-input">
+                            <div class="input-group col-lg-6">
+                                <input type="text" class="search-query form-control" placeholder="Enter project name..." />
+                                <span class="input-group-btn" id='searchbutton'>
+                                    <button class="btn btn-action" type="button" id="search-button-id">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+   </div>
+   <!-- /.col-lg-12 -->
+
+   
+    <script>
+    
+    var $ = function (selector) {
+        return document.querySelector(selector);
+    };
+
+    var searchbutton = $('#searchbutton').getElementsByTagName('button');
+
+    //function search_data() {
+        
+    //}
+
+    searchbutton[0].addEventListener("click", function(){window.location = '/data'});
+   
+    </script>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+   <!-- DataTables JavaScript -->
+   <script src={{url_for('static', filename="vendor/datatables/js/jquery.dataTables.js")}}></script>
+   <script src={{url_for('static', filename="vendor/datatables-plugins/dataTables.bootstrap.js")}}></script>
+   <script src={{url_for('static', filename="vendor/datatables-responsive/dataTables.responsive.js")}}></script>
+
+   <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+   <script>
+   function SetUpTable() {
+      $('#example_table').DataTable({
+         responsive: true,
+         retrieve: true,
+         bDestroy: true
+      });
+   };
+   </script>
+
+{% endblock %}
