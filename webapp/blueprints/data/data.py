@@ -6,8 +6,8 @@ import pandas as pd
 
 from . import blueprint
 
-@blueprint.route('/data/<sessionid>', methods=['GET', 'POST'])
-def show_data(sessionid):
+@blueprint.route('/data', methods=['GET', 'POST'])
+def show_data():#sessionid):
 
     app.logger.info('-> data')
 
@@ -15,4 +15,4 @@ def show_data(sessionid):
     df = app.cham.df.to_dict()
     app.logger.error(df)
 
-    return render_template('/data/data.html.j2', sessionid=sessionid, cham_df=df)
+    return render_template('/data/data.html.j2', sessionid=0, cham_df=df)

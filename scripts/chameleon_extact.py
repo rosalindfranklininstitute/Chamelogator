@@ -29,8 +29,10 @@ class ChameleonExtract(object):
             "SELECT ROWID as SessionId, DateTimeUTC, Project FROM Sessions", self.con
         )
         self.sample = pd.read_sql_query(
-            "SELECT SessionId, Concentration, DetergentType, DetergentConcentration, \
-                GlycerolConcentration FROM SampleDetails",
+            "SELECT SessionId, ProteinClass, MolecularWeight, Concentration, \
+                BufferDescription, BufferConcentration, DetergentType, \
+                DetergentConcentration, GlycerolConcentration \
+                FROM SampleDetails",
             self.con,
         )
 
@@ -40,7 +42,7 @@ class ChameleonExtract(object):
             self.con,
         )
         self.plunges = pd.read_sql_query(
-            "SELECT OperationId, WickingTimeUsed FROM Plunges", self.con
+            "SELECT OperationId, WickingTimeUsed, Mode as PlungeMode FROM Plunges", self.con
         )
         self.treatments = pd.read_sql_query(
             "SELECT GridId, GlowDischargeId FROM Treatments", self.con
@@ -99,4 +101,5 @@ if __name__ == "__main__":
 
     cham = ChameleonExtract()
 
-    cham.print_df()
+    #cham.print_df()
+    cham.save_df()
