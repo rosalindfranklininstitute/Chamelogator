@@ -1,6 +1,6 @@
 {% extends "base.html.j2" %}
 
-{# {% block heading %}Hello World!{% endblock %} #}
+{% block heading %}Dashboard{% endblock %}
 
 {% block content %}
     <!-- Content Wrapper -->
@@ -17,8 +17,10 @@
 
             <!-- panel -->
             <div class="panel panel-default">
-                <div class="panel-heading">
-                 Heading
+                <div class="panel-heading" style="margin-bottom: 30px">
+                <h3>
+                Welcome to the Chamelogator dashboard!
+                </h3>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -33,21 +35,19 @@
 
                 <div class="panel-body">
 
-                    <div class="container" style="margin-left: 25px;margin-bottom: 25px;">
-                        <div class="row">
-                            <h3>Project Name Search</h3>
-                            <div id="custom-search-input">
-                                <div class="input-group col-lg-6">
-                                    <input type="text" class="search-query form-control" placeholder="Enter project name..." />
-                                    <span class="input-group-btn" id='searchbutton'>
-                                        <button class="btn btn-action" type="button" id="search-button-id">
-                                            <span class=" glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
+
+                    <h5>Project Name Search</h5>
+                    <div id="custom-search-input">
+                        <div class="input-group" style="width: 500px">
+                            <input type="text" class="search-query form-control" placeholder="Enter project name..." />
+                            <span class="input-group-btn" id='searchbutton'>
+                                <button class="btn btn-action border" type="button" id="search-button-id">
+                                    <span class="fas fa-search"></span>
+                                </button>
+                            </span>
                         </div>
                     </div>
+
 
                 </div>
                 <!-- /.panel-body -->

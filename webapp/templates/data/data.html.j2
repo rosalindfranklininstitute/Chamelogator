@@ -28,31 +28,16 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
 
-        <div id="loading">
-        </div>
+            <div id="loading"></div>
 
-        {# <div class="panel-heading">
-            DataTables Advanced Tables
-        </div>
-        <!-- /.panel-heading --> #}
+            {# <div class="panel-heading">
+                DataTables Advanced Tables
+            </div>
+            <!-- /.panel-heading --> #}
             <div class="panel-body">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="data_table">
-                    <thead id="thead">
-                        <tr>
-                        {% for key in cham_df.keys() %}
-                            <th>{{ key|safe }}</th>
-                        {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-                        {% for value in cham_df.items() %}
-                        <tr>
-                            {# {% for i in range() %}
-                            <td>{{ element.value()|safe }}</td>
-                            {% endfor %} #}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
+                <thead></thead>
+                <tbody></tbody>
                 </table>
                 <!-- /.table-responsive -->
             </div>
@@ -64,104 +49,45 @@
 
 
 
-   
+    <!-- jQuery -->
+    <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
     <script>
-    
-    var $ = function (selector) {
-        return document.querySelector(selector);
-    };
 
-    var table_present = false;
-    console.log(cham_df)
+    $(document).ready(function() {
+        var table = null;
 
-    function DisplayData() {
+        var df = {{ cham_df }}
 
-        if (table_present == true) {
+        df_keys = Object.keys(df)
+        console.log(df_keys)
+        df_vals = Object.values(df)
+        console.log(df_vals)
 
-            var table = $('#data_table');
+        df_vals.forEach((element, index, array) => {
+                console.log(element);
+        });
 
-            table.DataTable().destroy();
-
-            $('#thead').empty();
-            $('#tbody').empty();
-
-
-            table_present = false;
-
-        };
-
-        var loading = document.getElementById('loading');
-        $('#loading').empty();
-        var p = "<p class='alert alert-info'>Loading...</p>";
-        loading.innerHTML += p;
-        
-
-        if (table_present == false) {
-            // onclick stuff
-            console.log("id: ", $(this).attr('data-sessionid'));
-            sessionid = $(this).attr('data-sessionid');
-
-            $.ajax({
-                method: "GET",
-                url: "/apis/fetch_data/" + sessionid
-            })
-            .done(function ( cham_df ) {
-                $('#loading').empty();
-
-                console.log('DONE!');
-
-                var thead = document.getElementById('thead');
-
-                var tr = "<tr>";
-                for (var i = 0; i < cham_df.keys().length; i++) {
-                    tr += "<th>" + cham_df[0][i]
+        $('a#calculate').bind('click', function() {
+            $.getJSON('/_get_table', {
+            cols: df_keys.length,
+            rows: $('input[name="b"]').val()
+            }, function(data) {
+                $("#elements").text(data.number_elements);
+                if (table !== null) {
+                    table.destroy();
+                    table = null;
+                    $("#a_nice_table").empty();
                 }
-
-                thead.innerHTML += tr;
-
-                var tbody = document.getElementById('tbody');
-
-                for (var i = 0; i < cham_df.length; i++) {
-                    //console.log(jobs[i]);
-                    var tr = "<tr>";
-
-                    tr += "<td>" + jobs[i]['username'] + "</td>" 
-                    + "<td>" + jobs[i]['description'] + "</td>" 
-                    + "<td>" + jobs[i]['start time'] + "</td>" 
-                    + "<td><div>"
-                        + "</div></td>" 
-                    + "<td>" + "<a href='#' type='button' class='btn btn-default'>|Button|</a>" + "</td></tr>";
-
-                    /* We add the table row to the table body */
-                    tbody.innerHTML += tr;
-                };
-
-                SetUpTable();
-
-                table_present = true
-
-            })
-            .fail(function ( response ) {
-                
-                $('#loading').empty();
-
-                console.log('FAIL!');
-                console.log(response.responseText);
-
-
-                var p = "<p class='alert-warning'>" + response.responseText + "</p>"
-                $('#loading').html(p);
-
-
+                table = $("#a_nice_table").DataTable({
+                    data: data.my_table,
+                    columns: data.columns
+                });
             });
-        };
-
-    };
-
-    //editbutton.addEventListener("click", function(){console.log(this.id)});
-    //delbutton.addEventListener("click", function(){console.log(this.id)});
-   
+            return false;
+        });
+    });
     </script>
+   
 
 {% endblock %}
 
@@ -174,12 +100,12 @@
    <script src={{url_for('static', filename="vendor/Responsive-2.2.9/js/dataTables.responsive.js")}}></script>
 
    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-   <script>
+   {# <script>
    $(document).ready(function() {
-      $('#data_table').DataTable({
-         responsive: true
-      });
+        $('#data_table').DataTable({
+            //responsive: true
+        });
    });
-   </script>
+   </script> #}
 
 {% endblock %}
