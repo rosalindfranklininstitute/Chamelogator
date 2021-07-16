@@ -3,7 +3,6 @@
 {% block heading %}Data{% endblock %}
 
 {% block content %}
-    	<div class="col-lg-2">
 
     {% with messages = get_flashed_messages(with_categories=true) %}
 		{% for category, message in messages %}
@@ -11,41 +10,47 @@
 		{% endfor %}
 	{% endwith %}
 
-        <div class="panel panel-default">
-			<div class="panel-heading">
-            Data Table
-			</div>
-        
-			</div>
-			<!-- /.panel-body -->
-		</div>
-		<!-- /.panel -->
-	</div>
-	<!-- /.col-lg-12 -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        DataTable to show relevant data.
+        </div>
+    
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
 
 
 
-    <div class="col-lg-12">
-        <div class="panel panel-default">
+    <div class="panel panel-default">
+    <div class="container-fluid">
 
-            <div id="loading"></div>
+        <div id="loading"></div>
 
-            {# <div class="panel-heading">
-                DataTables Advanced Tables
-            </div>
-            <!-- /.panel-heading --> #}
-            <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="data_table">
+        <form class="container push-left" style="border: solid #4e73df">
+            <fieldset id="checkboxes">
+            <legend style="padding: 3px 6px;">Select the options below:</legend>
+                
+            </fieldset>
+        </form>
+
+        <p><a class="btn btn-dark" href="javascript:void();" id="generate">Generate DataTable</a></p>
+
+        {# <div class="panel-heading">
+            DataTables Advanced Tables
+        </div>
+        <!-- /.panel-heading --> #}
+        <div class="panel-body">
+            <table width="100%" class="table table-striped table-bordered table-hover" id="data_table">
                 <thead></thead>
                 <tbody></tbody>
-                </table>
-                <!-- /.table-responsive -->
-            </div>
-            <!-- /.panel-body -->
+            </table>
+            <!-- /.table-responsive -->
         </div>
-        <!-- /.panel -->
-   </div>
-   <!-- /.col-lg-12 -->
+        <!-- /.panel-body -->
+    </div>
+    </div>
+    <!-- /.panel -->
 
 
 
@@ -55,34 +60,106 @@
 
     $(document).ready(function() {
         var table = null;
+        var df_k = null;
+        var df_v = null;
+        //var df_rows = null;
 
-        var df = {{ cham_df }}
+        var df = {{ cham_df }};
 
-        df_keys = Object.keys(df)
-        console.log(df_keys)
-        df_vals = Object.values(df)
-        console.log(df_vals)
+        df_k = Object.keys(df);
+        console.log(df_k)
+        df_v = Object.values(df);
+        console.log(df_v)
 
-        df_vals.forEach((element, index, array) => {
-                console.log(element);
+        
+
+        var check_div = document.getElementById('checkboxes');
+
+        var ul = "<ul style='list-style-type: disc;-webkit-columns: 3;-moz-columns: 3;columns: 3;list-style-position: inside;'>"
+
+        df_k.forEach((element, index) => {
+            ul += "<input class='tickbox' type='checkbox' name='checkbox' id="+element+" value="+index+" style='margin: .2rem'>"
+            ul += "<label for='"+element+"'>"+"&nbsp"+element+"</label><br>"
         });
+        ul += "</ul>"
 
-        $('a#calculate').bind('click', function() {
-            $.getJSON('/_get_table', {
-            cols: df_keys.length,
-            rows: $('input[name="b"]').val()
-            }, function(data) {
-                $("#elements").text(data.number_elements);
-                if (table !== null) {
-                    table.destroy();
-                    table = null;
-                    $("#a_nice_table").empty();
-                }
-                table = $("#a_nice_table").DataTable({
-                    data: data.my_table,
-                    columns: data.columns
+        check_div.innerHTML += ul
+
+
+
+
+        $('a#generate').bind('click', function() {
+
+//            $.ajax({
+//                method: "GET",
+//                url: '/_get_df',
+//            })
+//            .done(function(fetched_df) {
+
+            // Needs to re-fetch df for remaking the table arrays
+            var df2 = {{ cham_df }};
+
+            var df_keys = Object.keys(df2);
+            var df_vals = Object.values(df2);
+
+            let boxIds = [];
+
+            elems = check_div.getElementsByClassName('tickbox')
+            for (let item of elems) {
+                if ($(item).prop('checked')) {
+                    boxIds.push($(item).prop('id'))
+                };
+            };
+
+            //console.log(boxIds)
+            df_keys.forEach((element, index) => {
+                if (!boxIds.includes(element)) {
+                    //console.log(element, index);
+                    delete df_keys[index];
+                    delete df_vals[index];
+                };
+            });
+            //console.log(df_keys)
+
+            // Loops through every column making sure to get largest size, even if the same
+            df_rows = 0
+            df_vals.forEach((element, index) => {
+                //console.log(element);
+                df_vals[index] = Object.values(element);
+
+                rows = Object.keys(element).length;
+                if (rows > df_rows) {
+                    df_rows = rows;
+                    //console.log("larger")
+                };
+            });
+
+
+
+
+            columns = [];
+            df_keys.forEach((element, id) => {
+                columns.push({"title": element});
+            });
+
+            // Maps the columns back into rows to be used by DataTables
+            var val_cols = df_vals[0].map(function(col, i) {
+                return df_vals.map(function(row) {
+                    return row[i];
                 });
             });
+
+            if (table !== null) {
+                table.destroy();
+                table = null;
+                $("#data_table").empty();
+            }
+            table = $("#data_table").DataTable({
+                data: val_cols,
+                columns: columns,
+                responsive: true
+            });
+            //});
             return false;
         });
     });
