@@ -133,3 +133,4 @@ dmypy.json
 *.db-shm
 *.db-wal
 *.csv
+*.log
