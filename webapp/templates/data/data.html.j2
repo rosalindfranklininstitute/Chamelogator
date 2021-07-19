@@ -67,11 +67,10 @@
         var df = {{ cham_df }};
 
         df_k = Object.keys(df);
-        console.log(df_k)
+        //console.log(df_k)
         df_v = Object.values(df);
-        console.log(df_v)
+        //console.log(df_v)
 
-        
 
         var check_div = document.getElementById('checkboxes');
 
@@ -115,8 +114,11 @@
             df_keys.forEach((element, index) => {
                 if (!boxIds.includes(element)) {
                     //console.log(element, index);
-                    delete df_keys[index];
-                    delete df_vals[index];
+                    //var i = df_keys.indexOf(element);
+                    if (index > -1) {
+                        df_keys.splice(index, 1);
+                        df_vals.splice(index, 1);
+                    };
                 };
             });
             //console.log(df_keys)
@@ -134,7 +136,8 @@
                 };
             });
 
-
+            //console.log(df_keys)
+            //console.log(df_vals)
 
 
             columns = [];
