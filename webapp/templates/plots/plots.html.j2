@@ -3,7 +3,107 @@
 {% block heading %}Plots{% endblock %}
 
 {% block content %}
-    <div class="col-lg-12">
+    
+    <div class="panel panel-default">
+    <div class="container-fluid" id="dropdowns">
+
+        <h3>Test Plot</h3><br>
+
+        {# <select> tags go here #}
+
     </div>
+    <div class="container-fluid">
+
+        {# <img src="data:image/png;base64, {{ plot_url }}"> #}
+        <canvas id="myChart" width="100" height="100"></canvas>
+
+    </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
+    <!-- charts.js -->
+    <script src={{url_for('static', filename="vendor/chart.js-3.4.1/package/dist/chart.min.js")}}></script>
+    <script>
+
+    $(document).ready(function() {
+        var df_k = null;
+        var df_v = null;
+        //var df_rows = null;
+
+        var df = {{ cham_df }};
+
+        df_k = Object.keys(df);
+        //console.log(df_k)
+        df_v = Object.values(df);
+        //console.log(df_v)
+
+        axes = ['xaxis', 'yaxis'];
+
+        axes.forEach((axis, i) => {
+            var dropdown_div = document.getElementById('dropdowns');
+
+            var select = "<select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
+
+
+            df_k.forEach((element, index) => {
+                select += "<option id="+element+" value="+index+">"+element+"</option>";
+            });
+            select += "</select>"
+
+            dropdown_div.innerHTML += select;
+        });
+
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        },
+        // Boolean - whether or not the chart should be responsive and resize when the browser does.
+
+        responsive: true,
+
+        // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+
+        maintainAspectRatio: false,
+        });
+
+
+    });
+
+    </script>
+
 
 {% endblock %}
