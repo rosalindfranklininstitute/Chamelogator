@@ -71,6 +71,7 @@
         df_v = Object.values(df);
         //console.log(df_v)
 
+        
 
         var check_div = document.getElementById('checkboxes');
 
@@ -98,8 +99,11 @@
             // Needs to re-fetch df for remaking the table arrays
             var df2 = {{ cham_df }};
 
-            var df_keys = Object.keys(df2);
-            var df_vals = Object.values(df2);
+            var df_keys = []
+            var df_vals = [] 
+
+            df_keys = Object.keys(df2);
+            df_vals = Object.values(df2);
 
             let boxIds = [];
 
@@ -110,24 +114,23 @@
                 };
             };
 
+            var new_df_keys = []
+            var new_df_vals = []
             //console.log(boxIds)
             df_keys.forEach((element, index) => {
-                if (!boxIds.includes(element)) {
+                if (boxIds.includes(element)) {
                     //console.log(element, index);
-                    //var i = df_keys.indexOf(element);
-                    if (index > -1) {
-                        df_keys.splice(index, 1);
-                        df_vals.splice(index, 1);
-                    };
+                    var i = df_keys.indexOf(element);
+                    new_df_keys.push(element);
+                    new_df_vals.push(df_vals[i]);
                 };
             });
-            //console.log(df_keys)
 
             // Loops through every column making sure to get largest size, even if the same
             df_rows = 0
-            df_vals.forEach((element, index) => {
+            new_df_vals.forEach((element, index) => {
                 //console.log(element);
-                df_vals[index] = Object.values(element);
+                new_df_vals[index] = Object.values(element);
 
                 rows = Object.keys(element).length;
                 if (rows > df_rows) {
@@ -136,18 +139,18 @@
                 };
             });
 
-            //console.log(df_keys)
-            //console.log(df_vals)
+//            console.log(df_keys)
+//            console.log(df_vals)
 
 
             columns = [];
-            df_keys.forEach((element, id) => {
+            new_df_keys.forEach((element, id) => {
                 columns.push({"title": element});
             });
 
             // Maps the columns back into rows to be used by DataTables
-            var val_cols = df_vals[0].map(function(col, i) {
-                return df_vals.map(function(row) {
+            var val_cols = new_df_vals[0].map(function(col, i) {
+                return new_df_vals.map(function(row) {
                     return row[i];
                 });
             });
