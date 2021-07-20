@@ -3,7 +3,7 @@
 {% block heading %}Plots{% endblock %}
 
 {% block content %}
-    
+
     <div class="panel panel-default">
     <div class="container-fluid" id="dropdowns">
 
@@ -12,10 +12,10 @@
         {# <select> tags go here #}
 
     </div>
-    <div class="container-fluid">
+    <div class="container">
 
         {# <img src="data:image/png;base64, {{ plot_url }}"> #}
-        <canvas id="myChart" width="100" height="100"></canvas>
+        <canvas id="myChart" style="display: block; box-sizing: border-box; height: 384px; width: 768px;" width="768" height="384"></canvas>
 
     </div>
     </div>
@@ -27,66 +27,27 @@
     <script src={{url_for('static', filename="vendor/chart.js-3.4.1/package/dist/chart.min.js")}}></script>
     <script>
 
-    $(document).ready(function() {
-        var df_k = null;
-        var df_v = null;
-        //var df_rows = null;
-
-        var df = {{ cham_df }};
-
-        df_k = Object.keys(df);
-        //console.log(df_k)
-        df_v = Object.values(df);
-        //console.log(df_v)
-
-        axes = ['xaxis', 'yaxis'];
-
-        axes.forEach((axis, i) => {
-            var dropdown_div = document.getElementById('dropdowns');
-
-            var select = "<select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
-
-
-            df_k.forEach((element, index) => {
-                select += "<option id="+element+" value="+index+">"+element+"</option>";
-            });
-            select += "</select>"
-
-            dropdown_div.innerHTML += select;
-        });
-
+    function generateChart(x_axis, x_data, y_axis, y_data) {
+        
+        var data = {x: x_data, y: y_data};
+        console.log(data);
+        
         var ctx = document.getElementById("myChart");
+
         var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'scatter',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: x_data,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                label: y_axis,
+                data: data
             }]
         },
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:false
                     }
                 }]
             }
@@ -100,6 +61,71 @@
         maintainAspectRatio: false,
         });
 
+    return myChart;
+    };
+
+    $(document).ready(function() {
+        var chart = null;
+        var df_k = null;
+        var df_v = null;
+        //var df_rows = null;
+
+        var xaxis = "";
+        var xdata = null;
+        var yaxis = "";
+        var ydata = null;
+
+        var df = {{ cham_df }};
+
+        df_k = Object.keys(df);
+        //console.log(df_k)
+        df_v = Object.values(df);
+        //console.log(df_v)
+
+        axes = ['xaxis', 'yaxis'];
+        var dropdown_div = document.getElementById('dropdowns');
+
+        axes.forEach((axis, i) => {
+            
+            var select = "<select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
+
+            df_k.forEach((element, index) => {
+                select += "<option id="+element+" value="+index+">"+element+"</option>";
+            });
+            select += "</select>"
+
+            dropdown_div.innerHTML += select;
+        });
+
+        $("select").each(function(){
+
+            var select = $(this);
+
+            select.change(function () {
+                console.log(select.prop('id'),select.val());
+                if (select.prop('id') == "xaxis") {
+                    xaxis = select.find('option:selected').prop('id');
+                    xdata = Object.values(df_v[select.val()]);
+                };
+                if (select.prop('id') == "yaxis") {
+                    yaxis = select.find('option:selected').prop('id');
+                    ydata = Object.values(df_v[select.val()]);
+                };
+
+                if (chart !== null) {
+                    console.log('destroy');
+                    chart.destroy();
+                    chart = null;
+                    $('myChart').empty();
+                };
+                chart = generateChart(xaxis, xdata, yaxis, ydata);
+                //console.log(chart);
+
+            });
+        }).trigger('change');
+
+
+        //chart = generateChart(xaxis, xdata, yaxis, ydata);
 
     });
 
