@@ -117,7 +117,12 @@
             var new_df_keys = []
             var new_df_vals = []
             //console.log(boxIds)
-            df_keys.forEach((element, index) => {
+            if (boxIds.length === 0) {
+                new_df_keys = df_keys;
+                new_df_vals = df_vals;
+                }
+            else {
+                df_keys.forEach((element, index) => {
                 if (boxIds.includes(element)) {
                     //console.log(element, index);
                     var i = df_keys.indexOf(element);
@@ -125,6 +130,7 @@
                     new_df_vals.push(df_vals[i]);
                 };
             });
+            };
 
             // Loops through every column making sure to get largest size, even if the same
             df_rows = 0
@@ -163,9 +169,38 @@
             table = $("#data_table").DataTable({
                 data: val_cols,
                 columns: columns,
-                responsive: true
+                scrollY:        "300px",
+                scrollX:        true,
+                scrollCollapse: true,
+                paging:         false,
+                fixedHeader:    true,
+                fixedColumns:   true
             });
             //});
+
+            // Setup - add a text input to each footer cell
+            $('.dataTable thead tr').clone(true).appendTo( '.dataTable thead' );
+            $('.dataTable thead tr:eq(1) th').each( function (i) {
+                // remove sorting classes/icons from cloning the header tags
+                $(this).removeClass('sorting');
+                $(this).removeClass('sorting_asc');
+
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        
+                $( 'input', this ).on( 'keyup change', function () {
+                    if ( table.column(i).search() !== this.value ) {
+                        table
+                            .column(i)
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
+            // Need to re-draw the table otherwise there is a duplicate header row in the table body???
+            //TODO: fix ghost dupe header row creation
+            table.draw();
+
             return false;
         });
     });
