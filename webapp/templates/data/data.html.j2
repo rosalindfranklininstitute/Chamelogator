@@ -14,7 +14,6 @@
 
         {# <div id="loading"></div> #}
 
-
         <!-- Area Chart -->
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
@@ -82,27 +81,40 @@
     // For Chart
     function generateChart(x_axis, x_data, y_axis, y_data) {
         
-        var data = {x: x_data, y: y_data};
-        console.log(data);
+        var data = [];
+        x_data.forEach((element, index) => {
+            data.push({x: x_data[index], y: y_data[index]});
+        });
         
-        var ctx = document.getElementById("myChart");
+        var ctx = document.getElementById("myChart").getContext("2d");
 
         var myChart = new Chart(ctx, {
-        type: 'scatter',
+        type: "scatter",
         data: {
-            labels: x_data,
             datasets: [{
                 label: y_axis,
-                data: data
+                data: data,
+                backgroundColor: 'rgb(78, 115, 223)'
             }]
         },
         options: {
+            title: {
+                display: true,
+                text: 'Original Data'
+            },
             scales: {
                 yAxes: [{
                     ticks: {
+                        min: 28,
+                        max: 40,
                         beginAtZero:false
                     }
                 }]
+            },
+            elements: {
+                point: {
+                    radius: 5
+                }
             }
         },
         // Boolean - whether or not the chart should be responsive and resize when the browser does.
