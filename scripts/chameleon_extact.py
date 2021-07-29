@@ -84,7 +84,7 @@ class ChameleonExtract(object):
             e, self.dispenses, "outer", left_on="OperationId", right_on="OperationId"
         )
 
-        # Sort the new massive dataframe be acsending Session IDs
+        # Sort the new massive dataframe be ascending Session IDs
         f.sort_values(by=["SessionId"], ascending=True, inplace=True)
         self.df = f
 

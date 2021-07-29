@@ -17,11 +17,3 @@ def show_data(sessionid = 0):
     df = app.cham.df.to_json()
 
     return render_template('/data/data.html.j2', sessionid=sessionid, cham_df=df)
-
-
-@blueprint.route('/_get_df', methods=['GET', 'POST'])
-def get_df():
-
-    json_df = app.cham.df.to_json()
-    
-    return json_df
