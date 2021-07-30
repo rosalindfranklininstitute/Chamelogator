@@ -9,13 +9,6 @@
         <!-- Main Content -->
         <div id="content">
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% for category, message in messages %}
-            <p class="alert-{{ category }}">{{ message }}</p>
-            {% endfor %}
-        {% endwith %}
-
-
 
         <h1 class="h3 mb-2 text-gray-800">Welcome to the Chamelogator Dashboard</h1>
         
@@ -55,20 +48,13 @@
    </div>
    <!-- /.Content Wrapper -->
 
-   
+    <!-- jQuery -->
+    <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
     <script>
-    
-    var $ = function (selector) {
-        return document.querySelector(selector);
-    };
 
-    var searchbutton = $('#searchbutton').getElementsByTagName('button');
+    var searchbutton = $('#searchbutton').find('button');
 
-    //function search_data() {
-        
-    //}
-
-    searchbutton[0].addEventListener("click", function(){window.location = '/data'});
+    searchbutton.bind("click", function() {window.location = '/data'});
    
     </script>
 

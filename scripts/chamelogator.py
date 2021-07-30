@@ -2,12 +2,12 @@ import pandas as pd
 import numpy as np
 import argparse
 import re
-import tabloo
+#import tabloo
 from pprint import PrettyPrinter
 
 pp = PrettyPrinter()
 
-from . import chameleon_extact
+from . import chameleon_extract
 
 
 def parse_args():
@@ -65,7 +65,7 @@ class Chamelogator:
 
         self.df = None
 
-        self.extr = chameleon_extact.ChameleonExtract()
+        self.extr = chameleon_extract.ChameleonExtract()
 
     def fetch_df(self):
 
@@ -98,5 +98,5 @@ if __name__ == "__main__":
     # Change to switch_case?
     if option == "print":
         pp.pprint(cham.df)
-    elif option == "display":
-        tabloo.show(cham.df)
+    # elif option == "display":
+    #     tabloo.show(cham.df)
