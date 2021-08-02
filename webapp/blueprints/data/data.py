@@ -14,6 +14,6 @@ def show_data(sessionid = 0):
 
     # df_keys = json.loads(app.cham.df.to_json(orient='split'))["columns"]
     # df_vals = json.loads(app.cham.df.to_json(orient='split'))["data"]
-    df = app.cham.df.to_json()
+    df = app.cham.to_json()
 
     return render_template('/data/data.html.j2', sessionid=sessionid, cham_df=df)
