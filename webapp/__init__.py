@@ -1,1 +1,0 @@
-from Chamelogator import scripts
