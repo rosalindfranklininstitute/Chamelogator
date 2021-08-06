@@ -10,8 +10,8 @@ from flask import current_app as app
 
 from . import blueprint
 
-@blueprint.route('/plots', methods=['GET', 'POST'])
-def show_plots():
+@blueprint.route('/trends', methods=['GET', 'POST'])
+def show_trends():
 
     # app.logger.info('-> plots')
 
@@ -30,4 +30,4 @@ def show_plots():
 
     # plot_url = base64.b64encode(img.getvalue()).decode()
 
-    return render_template('/plots/plots.html.j2', cham_df=df, plot_url=plot_url)
+    return render_template('/trends/trends.html.j2')

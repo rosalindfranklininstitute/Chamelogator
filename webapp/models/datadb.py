@@ -94,7 +94,9 @@ class Grids(db.Model):
     __tablename__ = 'Grids'
 
     ROWID = db.Column(db.Integer, db.ForeignKey('Operations.GridId'), primary_key=True)
+    SerialNumber = db.Column(db.Text)
 
-    def __init__(self, grid_id):
+    def __init__(self, grid_id, serial_number):
         self.ROWID = grid_id
+        self.SerialNumber = serial_number
 

@@ -18,8 +18,9 @@ app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 # (Must be done after creating app due to circular imports)
 from . import models
 
-from .blueprints.plots import plots
 from .blueprints.data import data
+from .blueprints.compare import compare
+from .blueprints.trends import trends
 from .models.datadb import db, Sessions, SampleDetails, Operations, Plunges, Treatments, Dispenses, Grids
 
 bind = db.session.bind
@@ -68,6 +69,7 @@ f.rename(columns={"ROWID_x": "SessionId", "ROWID_y": "OperationId", \
 
 # Sort the new massive dataframe be ascending Session IDs
 f.sort_values(by=["SessionId"], ascending=True, inplace=True)
+# If there isn't a value in the SessionId column, it probably is junk
 df = f.dropna(subset=['SessionId'])
 
 app.cham = df
@@ -77,5 +79,6 @@ def index():
 
     return render_template('index.html.j2')
 
-app.register_blueprint(plots.blueprint)
 app.register_blueprint(data.blueprint)
+app.register_blueprint(compare.blueprint)
+app.register_blueprint(trends.blueprint)

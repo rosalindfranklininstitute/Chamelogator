@@ -142,7 +142,6 @@
         var chart = null;
         var df_k = null;
         var df_v = null;
-        //var df_rows = null;
 
         var xaxis = "";
         var xdata = null;
@@ -207,30 +206,32 @@
             });
             };
 
-//            //console.log(boxIds)
+//            // If boxIds contains any checkbox ids...
 //            if (boxIds.length > 0) {
+//                // Loop through every df key
 //                df_keys.forEach((element, index) => {
-//                //if (!boxIds.includes(element)) {
-//                    //console.log(element, index);
-//                    var el2 = df_vals[df_keys.indexOf(element)];
-//                    new_df_keys.push(element);
-//                    new_df_vals.push(df_vals[i]);
-//                    if (boxIds.includes(element)) {
-//                        df_keys = df_keys.filter(element => boxIds.includes(element));
-//                        df_vals = df_vals.filter((element, index) => index === el2);
-//                    };
-//                };
-//            });
+//
+//                    // get the key index
+//                    var key_i = index //df_keys.indexOf(element);
+////                    new_df_keys.push(element);
+////                    new_df_vals.push(df_vals[i]);
+////                    if (boxIds.includes(element)) {
+//
+//                    // Filter out any keys that are in the boxIds array
+//                    df_keys = df_keys.filter(key => boxIds.includes(key));
+//                    // --WIP-- Filter out the corresponding value to that key
+//                    // ----- Loops through every df_key which wipes array from some reason
+//                    df_vals = df_vals.filter(function(val) {
+//                        return df_vals.indexOf(val) == key_i && key_i !== -1 && boxIds.includes(df_keys[key_i]);
+//                    });
+//                });
+//            };
+//            new_df_keys = df_keys;
+//            new_df_vals = df_vals;
 
-            // Loops through every column making sure to get largest size, even if the same
-            df_rows = 0
+            // Convert object array into array array for use with DT
             new_df_vals.forEach((element, index) => {
                 new_df_vals[index] = Object.values(element);
-
-                rows = Object.keys(element).length;
-                if (rows > df_rows) {
-                    df_rows = rows;
-                };
             });
 
 
@@ -239,12 +240,14 @@
                 columns.push({"title": element});
             });
 
+            console.log(new_df_vals);
             // Maps the columns back into rows to be used by DataTables
             var val_cols = new_df_vals[0].map(function(col, i) {
                 return new_df_vals.map(function(row) {
                     return row[i];
                 });
             });
+            console.log(val_cols);
 
             if (table !== null) {
                 table.destroy();
@@ -310,7 +313,7 @@
     
 
             // For Select boxes
-            axes = ['xaxis', 'yaxis'];
+            axes = ['x', 'y'];
             var dropdown_div = document.getElementById('dropdowns');
 
             // If two select boxes already exist, remove them
@@ -318,9 +321,11 @@
                 $('#dropdowns').find("select").remove();
             };
 
+            dropdown_div.innerHTML += "<form><div class='form-group form-inline'>"
+
             axes.forEach((axis, i) => {
                 
-                var select = "<select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
+                var select = "<label for="+axis+" style='font-size: 20px'>"+axis+":&nbsp</label><select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
 
                 new_df_keys.forEach((element, index) => {
                     select += "<option id="+element+" value="+index+">"+element+"</option>";
@@ -329,7 +334,7 @@
 
                 dropdown_div.innerHTML += select;
             });
-
+            dropdown_div.innerHTML += "</div></form>"
 
             $("select").each(function(){
 
@@ -337,11 +342,11 @@
 
                 select.change(function () {
                     //console.log(select.prop('id'),select.val());
-                    if (select.prop('id') == "xaxis") {
+                    if (select.prop('id') == "x") {
                         xaxis = select.find('option:selected').prop('id');
                         xdata = Object.values(new_df_vals[select.val()]);
                     };
-                    if (select.prop('id') == "yaxis") {
+                    if (select.prop('id') == "y") {
                         yaxis = select.find('option:selected').prop('id');
                         ydata = Object.values(new_df_vals[select.val()]);
                     };

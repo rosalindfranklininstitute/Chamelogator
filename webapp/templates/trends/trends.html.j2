@@ -1,0 +1,43 @@
+{% extends "base.html.j2" %}
+
+{% block heading %}Trends{% endblock %}
+
+{% block content %}
+    <!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column"">
+
+        <!-- Main Content -->
+        <div id="content">
+
+
+        <h1 class="h3 mb-2 text-gray-800">Trends Page</h1>
+        
+        <p class="mb-4">This is the placeholder home page for the trends page.</p>
+
+
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">UNDER CONSTRUCTION</h6>
+                </div>
+                <div class="card-body">
+
+
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 30rem;"
+                                    src="static/dist/img/undraw_under_construction_46pa.svg">
+
+                </div>
+                <!-- /.panel-body -->
+
+            </div>
+            <!-- Main Content -->
+        </div>
+   </div>
+   <!-- /.Content Wrapper -->
+
+    <!-- jQuery -->
+    <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
+    <!-- charts.js -->
+    <script src={{url_for('static', filename="vendor/chart.js-3.4.1/package/dist/chart.min.js")}}></script>
+
+{% endblock %}
