@@ -1,4 +1,5 @@
 import os
+
 from Chamelogator.webapp.app import app
 
 DEBUG = True

@@ -1,16 +1,19 @@
-import io
 import base64
-from io import BytesIO
+import io
+import json
 #from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 #import matplotlib.pyplot as plt
 #import seaborn as sns
 from datetime import datetime
-from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
-from flask import current_app as app
+from io import BytesIO
+
 import pandas as pd
-import json
+from flask import Blueprint
+from flask import current_app as app
+from flask import jsonify, redirect, render_template, request, session, url_for
 
 from . import blueprint
+
 
 @blueprint.route('/compare', methods=['GET', 'POST'])
 def show_plots():
@@ -32,6 +35,6 @@ def show_plots():
 
     # plot_url = base64.b64encode(img.getvalue()).decode()
     
-    df = app.cham.to_json()
+    df = app.cham.to_json(orient='columns', date_format = 'iso')
 
     return render_template('/compare/compare.html.j2', cham_df=df)

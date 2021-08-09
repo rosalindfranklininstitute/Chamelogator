@@ -1,8 +1,10 @@
-import os
 import logging
+import os
 from logging.handlers import RotatingFileHandler
-from flask import Flask, render_template, url_for, g, request, redirect, session, flash
+
 import pandas as pd
+from flask import (Flask, flash, g, redirect, render_template, request,
+                   session, url_for)
 
 # Setup the app
 app = Flask(__name__, root_path=os.path.abspath(os.path.dirname(__file__)))
@@ -17,11 +19,11 @@ app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 # import other parts of the app
 # (Must be done after creating app due to circular imports)
 from . import models
-
-from .blueprints.data import data
 from .blueprints.compare import compare
+from .blueprints.data import data
 from .blueprints.trends import trends
-from .models.datadb import db, Sessions, SampleDetails, Operations, Plunges, Treatments, Dispenses, Grids
+from .models.datadb import (Dispenses, Grids, Operations, Plunges,
+                            SampleDetails, Sessions, Treatments, db)
 
 bind = db.session.bind
 
