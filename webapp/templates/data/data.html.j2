@@ -356,11 +356,15 @@
                         chart = null;
                         $('myChart').empty();
                     };
-                    chart = generateChart(xaxis, xdata, yaxis, ydata);
+                    if (xdata !== null && ydata !== null && xdata.length && ydata.length) {
+                        chart = generateChart(xaxis, xdata, yaxis, ydata);
+                    };
                     //console.log(chart);
 
                 });
-            }).trigger('change');
+            });
+
+            $('select').last().trigger('change');
 
         //---------------------------------------------------------------------
 
