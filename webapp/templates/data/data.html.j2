@@ -190,7 +190,6 @@
 
             var new_df_keys = []
             var new_df_vals = []
-            //console.log(boxIds)
             if (boxIds.length === 0) {
                 new_df_keys = df_keys;
                 new_df_vals = df_vals;
@@ -198,7 +197,6 @@
             else {
                 df_keys.forEach((element, index) => {
                 if (boxIds.includes(element)) {
-                    //console.log(element, index);
                     var i = df_keys.indexOf(element);
                     new_df_keys.push(element);
                     new_df_vals.push(df_vals[i]);
@@ -240,14 +238,12 @@
                 columns.push({"title": element});
             });
 
-            console.log(new_df_vals);
             // Maps the columns back into rows to be used by DataTables
             var val_cols = new_df_vals[0].map(function(col, i) {
                 return new_df_vals.map(function(row) {
                     return row[i];
                 });
             });
-            console.log(val_cols);
 
             if (table !== null) {
                 table.destroy();
@@ -318,7 +314,7 @@
 
             // If two select boxes already exist, remove them
             if ($('#dropdowns').find("select").length > 0) {
-                $('#dropdowns').find("select").remove();
+                $('#dropdowns').empty();
             };
 
             dropdown_div.innerHTML += "<form><div class='form-group form-inline'>"
@@ -341,7 +337,7 @@
                 var select = $(this);
 
                 select.change(function () {
-                    //console.log(select.prop('id'),select.val());
+
                     if (select.prop('id') == "x") {
                         xaxis = select.find('option:selected').prop('id');
                         xdata = Object.values(new_df_vals[select.val()]);
@@ -359,7 +355,6 @@
                     if (xdata !== null && ydata !== null && xdata.length && ydata.length) {
                         chart = generateChart(xaxis, xdata, yaxis, ydata);
                     };
-                    //console.log(chart);
 
                 });
             });
