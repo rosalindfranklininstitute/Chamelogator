@@ -36,7 +36,7 @@ display: block;
         <div class="row" id="cards">
         
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4 compare_card" id="1">
+            <div class="col-sm-4 pb-3 compare_card" id="1">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -69,15 +69,14 @@ display: block;
                 </div>
             </div>
 
-        </div>
 
-        <div class="col-xl-1 col-md-1 mb-4" id="drop_buttons">
-            
-            <button class="btn btn-dark" id="add_table">
-                <i class="fas fa-fw fa-plus"></i>
-                <span>Add Table</span>
-            </button>
-            
+            <div class="col-sm-4 mb-3 align-self-center d-flex justify-content-center" id="buttons">
+                
+                <button class="btn btn-outline-primary p-5" id="add_table">
+                    <i class="fas fa-fw fa-plus fa-3x"></i>
+                </button>
+                
+            </div>
         </div>
 
     </div>
@@ -247,7 +246,7 @@ display: block;
             });
 
             // Clone the original card
-            compare_temp = compare_copy.clone(true).appendTo("#cards");
+            compare_temp = compare_copy.clone(true).insertBefore("#buttons");
             compare_id = compare_temp.prop("id");
 
             // While any id matches, increment until an unused id is found
