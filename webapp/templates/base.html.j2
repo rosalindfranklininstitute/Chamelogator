@@ -19,7 +19,7 @@
     <link href={{url_for('static', filename="vendor/metisMenu/metisMenu.min.css")}} rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href={{url_for('static', filename="dist/css/sb-admin-2.css")}} rel="stylesheet">
+    <link href={{url_for('static', filename="main/css/sb-admin-2.css")}} rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href={{url_for('static', filename="vendor/fontawesome-free-5.15.3-web/css/all.min.css")}} rel="stylesheet" type="text/css">
@@ -49,7 +49,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-dragon"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Chamelogator</div>
+                <div class="sidebar-brand-text mx-2">Chamelogator</div>
             </a>
 
             <!-- Divider -->
@@ -77,7 +77,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePlots"
                     aria-expanded="true" aria-controls="collapsePlots">
-                    <i class="fas fa-fw fa-chart-bar"></i>
+                    <i class="fas fa-fw fa-align-justify"></i>
                     <span>Compare</span>
                 </a>
                 <div id="collapsePlots" class="collapse" aria-labelledby="headingPlots"
@@ -93,7 +93,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="/trends">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-chart-bar"></i>
                     <span>Trends</span>
                 </a>
             </li>
@@ -117,7 +117,7 @@
 
                     <!-- Topbar Header -->
                     <heading id="topbar-heading">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 h2">
+                    <span class="mx-2 d-none d-lg-inline text-gray-600 h2">
                     {% block heading %}{% endblock %}
                     </span>
                     </heading>
@@ -207,7 +207,7 @@
     <script src={{url_for('static', filename="vendor/bootstrap-4.0.0-dist/js/bootstrap.min.js")}}></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src={{url_for('static', filename="dist/js/sb-admin-2.js")}}></script>
+    <script src={{url_for('static', filename="main/js/sb-admin-2.js")}}></script>
 
     <!-- Datatables JavaScript -->
     <script src={{url_for('static', filename="vendor/DataTables-1.10.25/js/jquery.dataTables.js")}} type="text/javascript" charset="utf8" ></script>
