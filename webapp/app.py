@@ -101,7 +101,6 @@ df.rename(
 df.sort_values(by=["SessionId"], ascending=True, inplace=True)
 # If there isn't a value in the SessionId column, it probably is junk
 df.dropna(subset=["SessionId"], inplace=True)
-app.logger.info(list(df.columns.values))
 
 # Store df in app namespace for easy access by rest of app
 # (should I do this?)
