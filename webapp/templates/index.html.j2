@@ -10,38 +10,100 @@
         <div id="content">
 
 
-        <h1 class="h3 mb-2 text-gray-800">Welcome to the Chamelogator Dashboard</h1>
-        
-        <p class="mb-4">This is the placeholder home page for the web app.</p>
+            <h1 class="h3 mb-2 text-gray-800">Welcome to the Chamelogator Dashboard</h1>
+            
+            <p class="mb-4">A web-app for Data Extraction and Visualisation of the Chameleon instrument and it's sample preparation.</p>
 
 
+            <div class="row">
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">UNDER CONSTRUCTION</h6>
-            </div>
-            <div class="card-body">
+                <div class="col-lg-6 pb-3 mb-4">
+                    <div class="card shadow col-lg-12 px-0">
 
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">The Chameleon Instrument</h6>
+                        </div>
 
-                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 30rem;"
-                                src="static/main/img/undraw_under_construction_46pa.svg">
+                        <div class="card-body">
+                            <p>
+                            The Chameleon is a next generation sample preparation instrument for cryo-EM.
+                            </p>
+                            <a href="https://www.sptlabtech.com/products/chameleon/chameleon">> Want to get to know it a bit better?</a>
 
-
-                <h6>[Just redirects to /data atm] Project Name Search</h5>
-                <div id="custom-search-input">
-                    <div class="input-group" style="width: 500px">
-                        <input type="text" class="search-query form-control" placeholder="Enter project name..." />
-                        <span class="input-group-btn" id='searchbutton'>
-                            <button class="btn btn-action border" type="button" id="search-button-id">
-                                <span class="fas fa-search"></span>
-                            </button>
-                        </span>
+                            <img class="img-fluid px-3 px-sm-4 my-5 mx-auto d-block"
+                                            src={{url_for('static', filename="main/img/chameleon_instrument_block.png")}}/>
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
                 </div>
 
+                <div class="col-lg-6 pb-3 mb-4">
+
+                    <div class="row">
+                        
+                        <div class="col-lg-12 mb-4 px-4">
+                            <div class="card border-left-primary shadow mb-4">
+                            <div class="card-body">
+
+                                <p>
+                                Want to explore the whole dataset?
+                                </p>
+
+                                <a class="btn btn-primary btn-icon-split text-white shadow" href="/data">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    
+                                    <span class="text">Data</span>
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mb-4 px-4">
+                            <div class="card border-left-primary shadow mb-4">
+                            <div class="card-body">
+
+                                <p>
+                                Want to compare specific CryoEM sessions?
+                                </p>
+
+                                <a class="btn btn-primary btn-icon-split text-white shadow" href="/compare">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    
+                                    <span class="text">Compare</span>
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mb-4 px-4">
+                            <div class="card border-left-primary shadow mb-4">
+                            <div class="card-body">
+
+                                <p>
+                                Want to plot the data to analyze any trends?
+                                </p>
+
+                                <a class="btn btn-primary btn-icon-split text-white shadow" href="/trends">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    
+                                    <span class="text">Trends</span>
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
-            <!-- /.panel-body -->
+            <!-- /.row -->
 
         </div>
         <!-- Main Content -->

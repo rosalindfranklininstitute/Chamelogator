@@ -47,7 +47,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-dragon"></i>
+                    <img style="width: 40px; height: 40px" rel="icon" type="image/png" src={{url_for('static', filename="main/img/chameleon_white.png")}}/>
                 </div>
                 <div class="sidebar-brand-text mx-2">Chamelogator</div>
             </a>
@@ -206,8 +206,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src={{url_for('static', filename="vendor/bootstrap-4.0.0-dist/js/bootstrap.min.js")}}></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src={{url_for('static', filename="main/js/sb-admin-2.js")}}></script>
+    {# <!-- Custom Theme JavaScript -->
+    <script src={{url_for('static', filename="main/js/sb-admin-2.js")}}></script> #}
 
     <!-- Datatables JavaScript -->
     <script src={{url_for('static', filename="vendor/DataTables-1.10.25/js/jquery.dataTables.js")}} type="text/javascript" charset="utf8" ></script>
