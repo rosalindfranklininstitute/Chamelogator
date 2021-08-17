@@ -4,21 +4,21 @@
 
 {% block content %}
     <!-- Content Wrapper -->
-	<div id="content-wrapper" class="d-flex flex-column"">
+	<div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
         <div id="content">
 
 
-            <h1 class="h3 mb-2 text-gray-800">Welcome to the Chamelogator Dashboard</h1>
+            <h1 class="h3 mb-2 text-gray-800 fadeIn">Welcome to the Chamelogator Dashboard</h1>
             
-            <p class="mb-4">A web-app for Data Extraction and Visualisation of the Chameleon instrument and it's sample preparation.</p>
+            <p class="mb-4 fadeIn">A web-app for Data Extraction and Visualisation of the Chameleon instrument and it's sample preparation.</p>
 
 
-            <div class="row">
+            <div class="row pb-4">
 
                 <div class="col-lg-6 pb-3 mb-4">
-                    <div class="card shadow col-lg-12 px-0">
+                    <div class="card shadow fadeIn_slow col-lg-12 px-0">
 
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">The Chameleon Instrument</h6>
@@ -42,9 +42,10 @@
                     <div class="row">
                         
                         <div class="col-lg-12 mb-4 px-4">
-                            <div class="card border-left-primary shadow mb-4">
-                            <div class="card-body">
+                            <div class="card border-left-primary fadeIn_slower shadow mb-4">
+                            <div class="card-body d-flex flex-row">
 
+                            <div class="col-lg-10">
                                 <p>
                                 Want to explore the whole dataset?
                                 </p>
@@ -57,13 +58,20 @@
                                     <span class="text">Data</span>
                                 </a>
                             </div>
+
+                            <div class="col-lg-2 align-self-center">
+                                <i class="fas fa-database fa-3x text-opaque-primary"></i>
+                            </div>
+                            
+                            </div>
                             </div>
                         </div>
 
                         <div class="col-lg-12 mb-4 px-4">
-                            <div class="card border-left-primary shadow mb-4">
-                            <div class="card-body">
+                            <div class="card border-left-primary fadeIn_slower shadow mb-4">
+                            <div class="card-body d-flex flex-row">
 
+                            <div class="col-lg-10">
                                 <p>
                                 Want to compare specific CryoEM sessions?
                                 </p>
@@ -76,16 +84,25 @@
                                     <span class="text">Compare</span>
                                 </a>
                             </div>
+
+                            <div class="col-lg-2 align-self-center">
+                                <i class="fas fa-clone fa-3x text-opaque-primary"></i>
+                            </div>
+
+                            </div>
                             </div>
                         </div>
 
                         <div class="col-lg-12 mb-4 px-4">
-                            <div class="card border-left-primary shadow mb-4">
-                            <div class="card-body">
+                            <div class="card border-left-primary fadeIn_slower shadow mb-4">
+                            <div class="card-body d-flex flex-row">
 
+                            <div class="col-lg-10">
                                 <p>
                                 Want to plot the data to analyze any trends?
                                 </p>
+
+
 
                                 <a class="btn btn-primary btn-icon-split text-white shadow" href="/trends">
                                     <span class="icon text-white-50">
@@ -94,6 +111,12 @@
                                     
                                     <span class="text">Trends</span>
                                 </a>
+                            </div>
+
+                            <div class="col-lg-2 align-self-center">
+                                <i class="fas fa-chart-line fa-3x text-opaque-primary"></i>
+                            </div>
+
                             </div>
                             </div>
                         </div>

@@ -7,38 +7,39 @@
 
     <div class="content">
 
-        <h1 class="h3 mb-2 text-gray-800">DataTable</h1>
+        <h1 class="h3 mb-2 text-gray-800 fadeIn">DataTable</h1>
         
-        <p class="mb-4">Select the data you want to show in the DataTable and Chart below.</p>
+        <p class="mb-4 fadeIn">Select the data you want to show in the DataTable and Chart below.</p>
 
 
         {# <div id="loading"></div> #}
 
         <!-- Area Chart -->
-        <div class="col-xl-11 col-lg-9">
-            <div class="card shadow mb-4">
+        <div class="d-inline-flex">
+            <div class="card shadow fadeIn_slow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Select the options below:</h6>
                 </div>
-                <fieldset id="checkboxes" class="pt-4"></fieldset>
+                <fieldset id="checkboxes" class="pt-3 form-check"></fieldset>
             </div>
             </div>
         </div>
 
 
         <div class="col-xl-8 col-lg-7 pb-2">
-            <a class="btn btn-primary" href="javascript:void();" id="generate">Generate DataTable</a>
-            <a class="btn btn-primary" href="javascript:void();" id='delete'>Delete from table 1</a>
+            <a class="btn btn-primary fadeIn_slower" href="javascript:void();" id="generate">Generate DataTable</a>
+            <a class="btn btn-primary fadeIn_slower" href="javascript:void();" id='delete'>Delete from table 1</a>
             <p></p>
         </div>
 
+        <div id="loading-spinner"></div>
 
         <!-- DataTales Example -->
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4 invisible">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <h6 class="m-0 font-weight-bold text-primary">DataTable</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -53,17 +54,19 @@
         </div>
         <!-- /.card -->
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Test Plot</h6>
-            </div>
-            <div class="card-body">
-                <div id="dropdowns" class="d-flex justify-content-center">
-                    {# <select> tags go here #}
+        <div class="d-inline-flex">
+            <div class="card shadow mb-4 invisible">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Plot</h6>
                 </div>
+                <div class="card-body">
+                    <div id="dropdowns" class="d-flex justify-content-center">
+                        {# <select> tags go here #}
+                    </div>
 
-                {# <img src="data:image/png;base64, {{ plot_url }}"> #}
-                <canvas id="myChart" style="display: block; box-sizing: border-box; height: 384px; width: 768px;" width="768" height="384"></canvas>
+                    {# <img src="data:image/png;base64, {{ plot_url }}"> #}
+                    <canvas id="myChart" style="box-sizing: border-box;" width="500" height="384"></canvas>
+                </div>
             </div>
         </div>
 

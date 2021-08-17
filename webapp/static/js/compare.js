@@ -133,6 +133,11 @@ $(document).ready(function() {
             // Variable for highest id of card to be stored in
             var card_id = this.id;
 
+            console.log($(this).parents(".card"));
+            $(this).parents(".card").removeClass('.fadeIn_slow');
+            $(this).parents(".card").addClass('.fadeOut_slow');
+            console.log($(this).parents(".card"));
+
             $(this).parents(".compare_card").remove();
             
             if (card_id-1 > -1) {

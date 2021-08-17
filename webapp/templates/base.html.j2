@@ -13,7 +13,7 @@
     <title>Chamelogator</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href={{url_for('static', filename="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css")}} rel="stylesheet">
+    <link href={{url_for('static', filename="vendor/bootstrap-5.0.2-dist/css/bootstrap.css")}} rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href={{url_for('static', filename="vendor/metisMenu/metisMenu.min.css")}} rel="stylesheet">
@@ -75,19 +75,10 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePlots"
-                    aria-expanded="true" aria-controls="collapsePlots">
+                <a class="nav-link" href="/compare">
                     <i class="fas fa-fw fa-align-justify"></i>
                     <span>Compare</span>
                 </a>
-                <div id="collapsePlots" class="collapse" aria-labelledby="headingPlots"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Compare Types:</h6>
-                        <a class="collapse-item" href="/compare">Compare1</a>
-                        {# <a class="collapse-item" href="#">Compare2</a> #}
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -117,7 +108,7 @@
 
                     <!-- Topbar Header -->
                     <heading id="topbar-heading">
-                    <span class="mx-2 d-none d-lg-inline text-gray-600 h2">
+                    <span class="mx-2 d-none d-lg-inline text-gray-600 h2 fadeIn_title">
                     {% block heading %}{% endblock %}
                     </span>
                     </heading>
@@ -204,7 +195,7 @@
     <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src={{url_for('static', filename="vendor/bootstrap-4.0.0-dist/js/bootstrap.min.js")}}></script>
+    <script src={{url_for('static', filename="vendor/bootstrap-5.0.2-dist/js/bootstrap.min.js")}}></script>
 
     {# <!-- Custom Theme JavaScript -->
     <script src={{url_for('static', filename="main/js/sb-admin-2.js")}}></script> #}

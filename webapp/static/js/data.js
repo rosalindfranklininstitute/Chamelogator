@@ -81,11 +81,13 @@ $(document).ready(function() {
     // For Checkboxes
     var check_div = document.getElementById('checkboxes');
 
-    var ul = "<ul style='list-style-type: disc;-webkit-columns: 4;-moz-columns: 4;columns: 4;list-style-position: inside;'>"
+    var ul = "<ul class='pl-3' style='-webkit-columns: 4;-moz-columns: 4;columns: 4'>"
 
     df_k.forEach((element, index) => {
-        ul += "<input class='tickbox' type='checkbox' name='checkbox' id="+element+" value="+index+" style='margin: .2rem'>"
-        ul += "<label for='"+element+"'>"+"&nbsp"+element+"</label><br>"
+        ul += "<div class='custom-checkbox mr-0'>"
+        ul += "<input class='custom-control-input position-relative start-0' type='checkbox' name='checkbox' id="+element+" value="+index+" style='margin: .2rem'>"
+        ul += "<label class='custom-control-label' for='"+element+"'>"+element+"</label>"
+        ul += "</div>"
     });
     ul += "</ul>"
 
@@ -102,7 +104,11 @@ $(document).ready(function() {
 
         let boxIds = [];
 
-        elems = check_div.getElementsByClassName('tickbox')
+        $('#loading_spinner').each((i, obj) => {
+            $(obj).html('<div class="d-flex justify-content-center><div class="spinner-border text-primary" role="status"></div></div>');
+        });
+
+        elems = check_div.getElementsByClassName('custom-control-input')
         for (let item of elems) {
             if ($(item).prop('checked')) {
                 boxIds.push($(item).prop('id'))
@@ -164,6 +170,16 @@ $(document).ready(function() {
             return new_df_vals.map(function(row) {
                 return row[i];
             });
+        });
+
+        $('#loading_spinner').each((i, obj) => {
+            $(obj).remove();
+        });
+
+        // Make cards visible again
+        $('.invisible').each((i, card) => {
+            $(card).removeClass('invisible');
+            $(card).addClass('fadeIn_slow');
         });
 
         if (table !== null) {
