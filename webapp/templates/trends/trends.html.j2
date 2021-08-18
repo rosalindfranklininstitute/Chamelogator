@@ -15,27 +15,31 @@
         <p class="mb-4 fadeIn">This is the placeholder home page for the trends page.</p>
 
 
-
-        <div class="card shadow fadeIn_slower mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">UNDER CONSTRUCTION</h6>
-            </div>
-            <div class="card-body">
-
-                <div id="dropdowns" class="d-flex justify-content-center">
-                    {# <select> tags go here #}
+        <div class="d-flex">
+            <div class="card shadow fadeIn_slow mb-4">
+                <div class="card-header d-flex flex-row align-items-center justify-content-between py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Plot</h6>
+                    <div id="save_buttons">
+                        <a id="save_png" class="btn btn-primary btn-sm justify-content-right mx-1" href="javascript:void();">Save .png</a>
+                        <a id="save_csv" class="btn btn-primary btn-sm justify-content-right mx-1" href="javascript:void();">Save .csv</a>
+                    </div>
                 </div>
+                <div class="card-body">
 
-                {# <img src="data:image/png;base64, {{ plot_url }}"> #}
-                <canvas id="myChart" style="display: block; box-sizing: border-box; height: 384px; width: 768px;" width="768" height="384"></canvas>
+                    <div id="dropdowns" class="d-flex justify-content-center">
+                        {# <select> tags go here #}
+                    </div>
 
+                    {# <img src="data:image/png;base64, {{ plot_url }}"> #}
+                    <canvas id="myChart" class="d-flex h-300 w-200"></canvas>
+
+
+                </div>
+                <!-- /.panel-body -->
 
             </div>
-            <!-- /.panel-body -->
-
+            <!-- Main Content -->
         </div>
-        <!-- Main Content -->
-
    </div>
    <!-- /.Content Wrapper -->
 

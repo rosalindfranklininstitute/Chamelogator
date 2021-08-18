@@ -127,18 +127,28 @@ $(document).ready(function() {
         });
     };
 
+    function cardFadeOut(card) {
+        $(card).parents(".card").removeClass('fadeIn_slow');
+        $(card).parents(".card").addClass('fadeOut_slow');
+
+        return card;
+    };
+
     // Event listener for when the cross of a card is clicked
     function deleteCard(e) {
         if ($('.compare_card').length > 1) {
             // Variable for highest id of card to be stored in
             var card_id = this.id;
 
-            console.log($(this).parents(".card"));
-            $(this).parents(".card").removeClass('.fadeIn_slow');
-            $(this).parents(".card").addClass('.fadeOut_slow');
-            console.log($(this).parents(".card"));
+            // Makes sure animation plays before carrying on
+            const promiseA = Promise.resolve(cardFadeOut(this));
 
-            $(this).parents(".compare_card").remove();
+            // TODO: try and get working without Timeout
+            Promise.all([promiseA]).then(function(card) {
+                setTimeout(() => {
+                    return Promise.resolve($(card).parents(".compare_card").remove());
+                }, 1200);
+            });
             
             if (card_id-1 > -1) {
                 tables.splice(card_id-1, 1);

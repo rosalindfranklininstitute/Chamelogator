@@ -104,9 +104,8 @@ $(document).ready(function() {
 
         let boxIds = [];
 
-        $('#loading_spinner').each((i, obj) => {
-            $(obj).html('<div class="d-flex justify-content-center><div class="spinner-border text-primary" role="status"></div></div>');
-        });
+        loading = document.getElementById('loading_spinner');
+        loading.innerHTML += '<div class="d-flex justify-content-center"><div class="spinner-border text-primary" role="status"></div></div>';
 
         elems = check_div.getElementsByClassName('custom-control-input')
         for (let item of elems) {
@@ -172,15 +171,12 @@ $(document).ready(function() {
             });
         });
 
-        $('#loading_spinner').each((i, obj) => {
-            $(obj).remove();
-        });
-
         // Make cards visible again
         $('.invisible').each((i, card) => {
             $(card).removeClass('invisible');
-            $(card).addClass('fadeIn_slow');
+            $(card).addClass('fadeIn_slowly');
         });
+        $('#loading_spinner').empty();
 
         if (table !== null) {
             table.destroy();
@@ -294,9 +290,7 @@ $(document).ready(function() {
                 };
 
             });
-        });
-
-        $('select').last().trigger('change');
+        }).trigger('change');
 
     //---------------------------------------------------------------------
 

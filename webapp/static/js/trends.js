@@ -7,7 +7,7 @@ function updateChart(currentChart, ctx, dataMap) {
 
     if(currentChart){currentChart.destroy();};
 
-    console.log(check(dataMap['line'].data.labels));
+    //console.log(check(dataMap['line'].data.labels));
 
     //TYPE OF DATA TO DETERMINE
     if (true) {
@@ -15,27 +15,58 @@ function updateChart(currentChart, ctx, dataMap) {
     };
 
     var params = dataMap[determineChart];
-    console.log(params);
-    currentChart = new Chart(ctx, {
+
+    // Note: changes to the plugin code is not reflected to the chart, because the plugin is loaded at chart construction time and editor changes only trigger an chart.update().
+    const background_plugin = {
+        id: 'custom_canvas_background_color',
+        beforeDraw: (chart) => {
+            const ctx = chart.canvas.getContext('2d');
+            ctx.save();
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, chart.width, chart.height);
+            ctx.restore();
+        }
+    };
+
+    var config = {
         type: params.type,
         data: params.data,
+        plugins: [background_plugin],
         options: {
-            title: {
-                display: true,
-                text: 'Original Data'
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart'
+                },
             },
             scales: {
-                yAxes: [{
+                x: {
+                    title: {
+                        display: true,
+                        text: 'x'
+                    },
                     ticks: {
                         min: 28,
                         max: 40,
                         beginAtZero:false
                     }
-                }]
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'y'
+                    },
+                    ticks: {
+                        min: 28,
+                        max: 40,
+                        beginAtZero:false
+                    }
+                }
             },
             elements: {
                 point: {
-                    radius: 5
+                    radius: 2
                 }
             },
         },
@@ -46,7 +77,11 @@ function updateChart(currentChart, ctx, dataMap) {
         // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
 
         maintainAspectRatio: false
-    });
+    };
+
+
+    //console.log(params);
+    currentChart = new Chart(ctx, config); 
 
     return currentChart;
 };
@@ -86,6 +121,11 @@ function generateChart(x_axis, x_data, y_axis, y_data) {
 
     return updateChart(currentChart, ctx, dataMap);
 
+};
+
+function savePNG(chart) {
+    $('#save_png').attr('href', chart.toBase64Image());
+    $('#save_png').attr('download', 'plot.png');
 };
 
 $(document).ready(function() {
@@ -155,8 +195,8 @@ $(document).ready(function() {
             };
 
         });
-    });
+    }).trigger('change');
 
-    $('select').last().trigger('change');
+    $('#save_png').bind('click', savePNG(chart));
 
 });

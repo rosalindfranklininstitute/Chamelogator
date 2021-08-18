@@ -9935,7 +9935,7 @@ a:focus {
 @-webkit-keyframes fadeIn-2 {
   0% {
     opacity: 0;
-    transform: translateY(60px);
+    transform: translateY(50px);
   }
   100% {
     opacity: 1;
@@ -9946,7 +9946,7 @@ a:focus {
 @keyframes fadeIn-2 {
   0% {
     opacity: 0;
-    transform: translateY(60px);
+    transform: translateY(50px);
   }
   100% {
     opacity: 1;
@@ -9957,8 +9957,8 @@ a:focus {
 .animated--fade-in-2, .fadeIn_slow {
   -webkit-animation-name: fadeIn-2;
   animation-name: fadeIn-2;
-  -webkit-animation-duration: 1750ms;
-  animation-duration: 1750ms;
+  -webkit-animation-duration: 1500ms;
+  animation-duration: 1500ms;
   -webkit-animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
   animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
 }
@@ -9966,7 +9966,7 @@ a:focus {
 @-webkit-keyframes fadeIn-3 {
   0% {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(80px);
   }
   100% {
     opacity: 1;
@@ -9977,7 +9977,7 @@ a:focus {
 @keyframes fadeIn-3 {
   0% {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(80px);
   }
   100% {
     opacity: 1;
@@ -9985,9 +9985,71 @@ a:focus {
   }
 }
 
-.animated--fade-in-3, .fadeIn_slower {
+.animated--fade-in-3, .fadeIn_slowly {
   -webkit-animation-name: fadeIn-3;
   animation-name: fadeIn-3;
+  -webkit-animation-duration: 2000ms;
+  animation-duration: 2000ms;
+  -webkit-animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
+  animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
+}
+
+@-webkit-keyframes fadeIn-4 {
+  0% {
+    opacity: 0;
+    transform: translateY(110px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeIn-4 {
+  0% {
+    opacity: 0;
+    transform: translateY(110px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.animated--fade-in-4, .fadeIn_slower {
+  -webkit-animation-name: fadeIn-4;
+  animation-name: fadeIn-4;
+  -webkit-animation-duration: 2500ms;
+  animation-duration: 2500ms;
+  -webkit-animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
+  animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
+}
+
+@-webkit-keyframes fadeIn-5 {
+  0% {
+    opacity: 0;
+    transform: translateY(140px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeIn-5 {
+  0% {
+    opacity: 0;
+    transform: translateY(140px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.animated--fade-in-5, .fadeIn_slowest {
+  -webkit-animation-name: fadeIn-5;
+  animation-name: fadeIn-5;
   -webkit-animation-duration: 3000ms;
   animation-duration: 3000ms;
   -webkit-animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
@@ -10016,7 +10078,7 @@ a:focus {
   }
 }
 
-.animated--fade-in, .fadeIn_title {
+.animated--fade-in_title, .fadeIn_title {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
   -webkit-animation-duration: 900ms;
@@ -10025,11 +10087,11 @@ a:focus {
   animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
-.animated--fade-out, .fadeOut_slow {
-  -webkit-animation-name: fadeOut;
-  animation-name: fadeOut;
-  -webkit-animation-duration: 1750ms;
-  animation-duration: 1750ms;
+.animated--fade-out_slow, .fadeOut_slow {
+  -webkit-animation-name: fadeOut_slow;
+  animation-name: fadeOut_slow;
+  -webkit-animation-duration: 1500ms;
+  animation-duration: 1500ms;
   -webkit-animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
   animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
 }
@@ -10041,7 +10103,7 @@ a:focus {
   }
   100% {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(-50px);
   }
 }
 
@@ -10052,7 +10114,7 @@ a:focus {
   }
   100% {
     opacity: 0;
-    transform: translateY(100px)
+    transform: translateY(-50px);
   }
 }
 
