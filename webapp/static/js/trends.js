@@ -3,7 +3,7 @@ function check(x) {
 }
 
 
-function updateChart(currentChart, ctx, dataMap) {
+function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
 
     if(currentChart){currentChart.destroy();};
 
@@ -16,7 +16,9 @@ function updateChart(currentChart, ctx, dataMap) {
 
     var params = dataMap[determineChart];
 
-    // Note: changes to the plugin code is not reflected to the chart, because the plugin is loaded at chart construction time and editor changes only trigger an chart.update().
+    // Note: changes to the plugin code is not reflected to the chart,
+    // because the plugin is loaded at chart construction time and editor
+    // changes only trigger an chart.update().
     const background_plugin = {
         id: 'custom_canvas_background_color',
         beforeDraw: (chart) => {
@@ -44,7 +46,7 @@ function updateChart(currentChart, ctx, dataMap) {
                 x: {
                     title: {
                         display: true,
-                        text: 'x'
+                        text: x_axis
                     },
                     ticks: {
                         min: 28,
@@ -55,7 +57,7 @@ function updateChart(currentChart, ctx, dataMap) {
                 y: {
                     title: {
                         display: true,
-                        text: 'y'
+                        text: y_axis
                     },
                     ticks: {
                         min: 28,
@@ -119,7 +121,7 @@ function generateChart(x_axis, x_data, y_axis, y_data) {
     var currentChart;
     var ctx = document.getElementById("myChart").getContext("2d");
 
-    return updateChart(currentChart, ctx, dataMap);
+    return updateChart(currentChart, ctx, dataMap, x_axis, y_axis);
 
 };
 
