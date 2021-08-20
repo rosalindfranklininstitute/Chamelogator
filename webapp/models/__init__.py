@@ -1,12 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-
-from Chamelogator.webapp.app import app
+from webapp.app import app
 
 db = SQLAlchemy(app)
 
 from . import datadb
-
-from .datadb import Sessions, SampleDetails, Operations, Plunges, Treatments, Dispenses, Grids
+from .datadb import (Dispenses, Grids, Operations, Plunges, SampleDetails,
+                     Sessions, Treatments)
 
 # @app.cli.command('initdb')
 # def initdb():
