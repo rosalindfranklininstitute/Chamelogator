@@ -11,6 +11,4 @@ def show_trends():
 
     app.logger.info('-> trends')
 
-    df = app.cham.to_json(orient='columns', date_format='iso')
-
-    return render_template('/trends/trends.html.j2', cham_df=df)
+    return render_template('/trends/trends.html.j2')

@@ -2701,6 +2701,21 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(6, 165, 157, 0.5)
 }
 
+.btn-check:checked .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
+  color: #fff;
+  background-color: #01a5af;
+  border-color: #01a5af;
+}
+
+.btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
+  box-shadow: 0 0 0 0.25rem rgba(6, 165, 157, 0.5);
+}
+
+.btn-outline-primary:disabled, .btn-outline-primary.disabled {
+  color: #01a5af;
+  background-color: transparent;
+}
+
 .btn-outline-secondary {
   color: #858796;
   border-color: #858796;
@@ -10056,7 +10071,7 @@ a:focus {
   animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
-@-webkit-keyframes fadeIn_title {
+@-webkit-keyframes fadeIn-title {
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -10067,7 +10082,7 @@ a:focus {
   }
 }
 
-@keyframes fadeIn_title {
+@keyframes fadeIn-title {
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -10079,12 +10094,39 @@ a:focus {
 }
 
 .animated--fade-in_title, .fadeIn_title {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn-title;
+  animation-name: fadeIn-title;
   -webkit-animation-duration: 900ms;
   animation-duration: 900ms;
   -webkit-animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
   animation-timing-function: transform ease-in-out, opacity cubic-bezier(0, 1, 0.4, 1);
+}
+
+@-webkit-keyframes fadeIn-stay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn-stay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animated--fade-in_stay, .fadeIn_stay {
+  -webkit-animation-name: fadeIn-stay;
+  animation-name: fadeIn-stay;
+  -webkit-animation-duration: 200ms;
+  animation-duration: 200ms;
+  -webkit-animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
+  animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
 .animated--fade-out_slow, .fadeOut_slow {

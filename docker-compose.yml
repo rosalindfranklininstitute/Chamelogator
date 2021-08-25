@@ -3,7 +3,7 @@ version: "3.4"
 services:
   reverse-proxy:
     image: traefik:v2.0
-    command: --api.insecure=true --providers.docker=true --entrypoints.web.address=:80
+    command: --api.insecure=true --providers.docker=true --entrypoints.web.address=:80 --log.level=DEBUG
     ports:
         - "80:80"
         - "8080:8080"
@@ -22,10 +22,10 @@ services:
     ports:
       - 5000:5000
     labels:
-      - "traefik.enable=true"
-      - "traefik.backend=flask"
-      - "traefik.flask.port=5000"
+      - traefik.enable=true
+      - traefik.backend=flask
+      - traefik.flask.port=5000
 
 volumes:
- chameleon-db: 
+ chameleon-db:
     driver: local

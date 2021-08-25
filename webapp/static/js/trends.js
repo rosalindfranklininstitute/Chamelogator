@@ -2,6 +2,35 @@ function check(x) {
     return x.every(i => (typeof i === "string"));
 }
 
+// https://stackoverflow.com/a/31405527/11051730
+function sort_chart(chart, datasetIndex) {
+    
+    console.log(chart.data);
+
+    var temp_data = chart.data.datasets[datasetIndex].data;
+    var temp_labels = chart.data.labels;
+    console.log(temp_labels);
+    
+    temp_labels.sort(function(a, b) {
+        return a - b;
+      });
+    
+    // chart.data.datasets.forEach(function (dataset, i) {
+    //     dataset.data.forEach(function (val, j) {
+    //         val = temp_data[j];
+    //     })
+    // });
+
+    chart.data.labels.forEach(function (label, j) {
+        label = temp_labels[j];
+    });
+    
+    // Reset the x-axis labels
+    //chart.data.labels = ;
+
+    chart.update();
+};
+
 
 function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
 
@@ -11,7 +40,7 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
 
     //TYPE OF DATA TO DETERMINE
     if (true) {
-        var determineChart = 'line';
+        var determineChart = 'scatter';
     };
 
     var params = dataMap[determineChart];
@@ -41,6 +70,35 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
                     display: true,
                     text: 'Chart.js Line Chart'
                 },
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: "rgb(255,255,255)",
+                    titleMarginBottom: 10,
+                    titleColor: '#6e707e',
+                    titleFont: 14,
+                    borderColor: '#dddfeb',
+                    borderWidth: 2,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        labelTextColor: function(label) {
+                            return 'rgb(1,165,175)';
+                        },
+                        title: function(tooltipItem) {
+                            var dataVal = tooltipItem[0].label;
+                            return "[X] " + x_axis + ": " + dataVal;
+                        },
+                        label: function (tooltipItem) {
+                            console.log(tooltipItem);
+                            var datasetLabel = tooltipItem.formattedValue;
+                            return "[Y] " + y_axis + ": " + datasetLabel;
+                        }
+                    }
+                }
             },
             scales: {
                 x: {
@@ -68,7 +126,7 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
             },
             elements: {
                 point: {
-                    radius: 2
+                    radius: 5
                 }
             },
         },
@@ -83,13 +141,18 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
 
 
     //console.log(params);
-    currentChart = new Chart(ctx, config); 
+    currentChart = new Chart(ctx, config);
+
+    // setTimeout(function () {
+    //     sort_chart(currentChart, 0)
+    // }, 200);
+    // currentChart.update();
 
     return currentChart;
 };
 
 function generateChart(x_axis, x_data, y_axis, y_data) {
-    
+
     var data = [];
     x_data.forEach((element, index) => {
         data.push({x: x_data[index], y: y_data[index]});
@@ -99,23 +162,45 @@ function generateChart(x_axis, x_data, y_axis, y_data) {
         'scatter': {
             type: 'scatter',
             data: {
-                datasets: [{
-                    label: y_axis,
-                    data: data,
-                    backgroundColor: 'rgb(78, 115, 223)'
-                }],
-            }
-        },
-        'line': {
-            type: 'line',
-            data: {
                 labels: x_data,
                 datasets: [{
                     label: y_axis,
-                    data: y_data
+                    data: data,
+                    backgroundColor: "rgb(90, 92, 105, 0.05)",
+                    borderColor: "rgb(90, 92, 105, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgb(90, 92, 105, 1)",
+                    pointBorderColor: " rgb(90, 92, 105, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgb(90, 92, 105, 1)",
+                    pointHoverBorderColor: "rgb(90, 92, 105, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2
                 }]
             }
-        }
+        },
+        // LINE PLOTS DONT SEEM TO WORK
+        // 'line': {
+        //     type: 'line',
+        //     data: {
+        //         labels: x_data,
+        //         datasets: [{
+        //             label: y_axis,
+        //             data: data,
+        //             lineTension: 0.3,
+        //             backgroundColor: "rgb(90, 92, 105, 0.05)",
+        //             borderColor: "rgb(90, 92, 105, 1)",
+        //             pointRadius: 3,
+        //             pointBackgroundColor: "rgb(90, 92, 105, 1)",
+        //             pointBorderColor: " rgb(90, 92, 105, 1)",
+        //             pointHoverRadius: 3,
+        //             pointHoverBackgroundColor: "rgb(90, 92, 105, 1)",
+        //             pointHoverBorderColor: "rgb(90, 92, 105, 1)",
+        //             pointHitRadius: 10,
+        //             pointBorderWidth: 2
+        //         }]
+        //     }
+        // }
     };
 
     var currentChart;
@@ -125,80 +210,108 @@ function generateChart(x_axis, x_data, y_axis, y_data) {
 
 };
 
-function savePNG(chart) {
-    $('#save_png').attr('href', chart.toBase64Image());
-    $('#save_png').attr('download', 'plot.png');
-};
 
 $(document).ready(function() {
-    var chart = null;
-    var df_k = null;
-    var df_v = null;
 
-    var xaxis = "";
-    var xdata = null;
-    var yaxis = "";
-    var ydata = null;
+    $.ajax({
+        method: 'GET',
+        url: '/apis/fetch_df'// + 'chameleon.db'
+    })
+    .done(function ( data ) {
 
-    // Declared in data.html.j2 file so jinja2 can substitute it in
-    //var df = {{ cham_df }};
-
-    df_k = Object.keys(df);
-    //console.log(df_k)
-    df_v = Object.values(df);
-    //console.log(df_v)
-
-    // Convert object array into array array for use with DT
-    df_v.forEach((element, index) => {
-        df_v[index] = Object.values(element);
-    });
+        var chart = null;
+        var df_k = null;
+        var df_v = null;
     
-    // For Select boxes
-    axes = ['x', 'y'];
-    var dropdown_div = document.getElementById('dropdowns');
+        var xaxis = "";
+        var xdata = null;
+        var yaxis = "";
+        var ydata = null;
 
-    dropdown_div.innerHTML += "<form><div class='form-group form-inline'>"
+        var df = JSON.parse(data);
 
-    axes.forEach((axis, i) => {
+        df_k = Object.keys(df);
+        //console.log(df_k)
+        df_v = Object.values(df);
+        //console.log(df_v)
+
+        // Convert object array into array array for use with DT
+        df_v.forEach((element, index) => {
+            df_v[index] = Object.values(element);
+        });
         
-        var select = "<label for="+axis+" style='font-size: 20px'>"+axis+":&nbsp</label><select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
+        // For Select boxes
+        axes = ['x', 'y'];
+        var select_div = document.getElementById('selects');
 
-        df_k.forEach((element, index) => {
-            select += "<option id="+element+" value="+index+">"+element+"</option>";
+        select_div.innerHTML += "<form><div class='form-group form-inline'>"
+
+        axes.forEach((axis, i) => {
+            
+            var select = "<label for="+axis+" style='font-size: 20px'>"+axis+":&nbsp</label><select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
+
+            df_k.forEach((element, index) => {
+                select += "<option id="+element+" value="+index+">"+element+"</option>";
+            });
+            select += "</select>"
+
+            select_div.innerHTML += select;
         });
-        select += "</select>"
+        select_div.innerHTML += "</div></form>"
 
-        dropdown_div.innerHTML += select;
-    });
-    dropdown_div.innerHTML += "</div></form>"
+        $("select").each(function(){
 
-    $("select").each(function(){
+            var select = $(this);
 
-        var select = $(this);
+            select.change(function () {
 
-        select.change(function () {
+                if (select.prop('id') == "x") {
+                    xaxis = select.find('option:selected').prop('id');
+                    xdata = Object.values(df_v[select.val()]);
+                };
+                if (select.prop('id') == "y") {
+                    yaxis = select.find('option:selected').prop('id');
+                    ydata = Object.values(df_v[select.val()]);
+                };
 
-            if (select.prop('id') == "x") {
-                xaxis = select.find('option:selected').prop('id');
-                xdata = Object.values(df_v[select.val()]);
-            };
-            if (select.prop('id') == "y") {
-                yaxis = select.find('option:selected').prop('id');
-                ydata = Object.values(df_v[select.val()]);
-            };
+                if (chart !== null) {
+                    chart.destroy();
+                    chart = null;
+                    $('myChart').empty();
+                };
+                if (xdata !== null && ydata !== null && xdata.length && ydata.length) {
+                    chart = generateChart(xaxis, xdata, yaxis, ydata);
+                };
 
-            if (chart !== null) {
-                chart.destroy();
-                chart = null;
-                $('myChart').empty();
-            };
-            if (xdata !== null && ydata !== null && xdata.length && ydata.length) {
-                chart = generateChart(xaxis, xdata, yaxis, ydata);
-            };
+            });
+        }).trigger('change');
 
+
+        $('#save_png').bind('click', function savePNG() {
+            $('#save_png').attr('href', chart.toBase64Image());
+            $('#save_png').attr('download', 'plot.png');
         });
-    }).trigger('change');
 
-    $('#save_png').bind('click', savePNG(chart));
+        $('#export_data').bind('click', function exportCSV() {
+            var data = [];
 
+            console.log(chart.getDatasetMeta(0));
+            // Extract the x and y data from the chart object
+            chart.getDatasetMeta(0).data.forEach((element) => {
+                elem = Object.values(element);
+                data.push({x: elem[0], y: elem[1]});
+            });
+            
+            json_data = JSON.stringify(data);
+            
+            var element = document.createElement('a');
+            element.href = 'data:text/txt;charset=utf-8,' + encodeURI(json_data);
+            element.target = '_blank';
+            element.download = 'export.txt';
+            element.click();
+        });
+
+
+
+    })
 });

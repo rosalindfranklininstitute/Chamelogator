@@ -19,14 +19,34 @@
             <div class="card shadow fadeIn_slow mb-4">
                 <div class="card-header d-flex flex-row align-items-center justify-content-between py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Plot</h6>
-                    <div id="save_buttons">
-                        <a id="save_png" class="btn btn-primary btn-sm justify-content-right mx-1" href="javascript:void();">Save .png</a>
-                        <a id="save_csv" class="btn btn-primary btn-sm justify-content-right mx-1 disabled" href="javascript:void();">Save .csv</a>
+                    {# <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <li><a class="dropdown-item active" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div> #}
+                    <div class="dropdown no-arrow">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-primary-muted"></i>
+                        </button>
+                        <div class="dropdown-menu animated--fade-in_stay" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Options</div>
+                            <a id="save_png" class="dropdown-item" href="javascript:void();">Save PNG</a>
+                            <div class="dropdown-divider"></div>
+                            <a id="export_data" class="dropdown-item">Export Data</a>
+                            <a id="import_data" class="dropdown-item disabled">Import Data</a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <div id="dropdowns" class="d-flex justify-content-center">
+                    <div id="selects" class="d-flex justify-content-center">
                         {# <select> tags go here #}
                     </div>
 
@@ -49,9 +69,6 @@
     <script src={{url_for('static', filename="vendor/chart.js-3.4.1/package/dist/chart.min.js")}}></script>
     
     
-    <script>
-        var df = {{ cham_df }}
-    </script>
     <script src={{url_for('static', filename="js/trends.js")}} type="text/javascript"></script>
 
 
