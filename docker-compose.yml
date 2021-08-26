@@ -14,8 +14,14 @@ services:
       - 8.8.8.8
     image: chamelogator
     volumes:
-      - chameleon-db:/appuser/data
-      - /home/ryi58813/Documents/ChameleonProject/dbs/RFI/chameleon.db:/appuser/data/chameleon.db
+      # - type: volume
+      #   source: /home/ryi58813/Documents/ChameleonProject/dbs/
+      #   target: /data/dbs
+      #   read_only: true
+      #   volumes:
+      #     nocopy: false
+      - chameleon-db:/appuser/
+      - /home/ryi58813/Documents/ChameleonProject/dbs/:/appuser/dbs/
     build:
       context: .
       dockerfile: ./Dockerfile

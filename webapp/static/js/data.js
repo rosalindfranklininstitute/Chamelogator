@@ -64,7 +64,7 @@ function fetch_data() {
     })
     .done(function ( data ) {
         // Declared in data.html.j2 file so jinja2 can substitute it in
-        var df = JSON.parse(data);
+        df = JSON.parse(data);
 
         df_k = Object.keys(df);
         //console.log(df_k)
@@ -90,6 +90,10 @@ function fetch_data() {
     })
 };
 
+var df;
+var df_k = null;
+var df_v = null;
+
 // Call before document.ready to try and speed up loading of checkboxes
 fetch_data();
 
@@ -97,28 +101,14 @@ $(document).ready(function() {
 
     var table = null;
     var chart = null;
-    var df_k = null;
-    var df_v = null;
+    // var df_k = null;
+    // var df_v = null;
 
     var xaxis = "";
     var xdata = null;
     var yaxis = "";
     var ydata = null;
 
-    $.ajax({
-        method: 'GET',
-        url: '/apis/fetch_df'// + 'chameleon.db'
-    })
-    .done(function ( data ) {
-        // Declared in data.html.j2 file so jinja2 can substitute it in
-        var df = JSON.parse(data);
-
-        df_k = Object.keys(df);
-        //console.log(df_k)
-        df_v = Object.values(df);
-        //console.log(df_v)
-
-    })
     //---------------------------------------------------------------------
 
     // For Generate DataTable event listener

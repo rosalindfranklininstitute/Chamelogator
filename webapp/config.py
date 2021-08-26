@@ -4,7 +4,7 @@ import os
 
 DEBUG = True
 
-DB_NAME = 'chameleon.db'
+DB_NAME = 'RFI_chameleon.db'
 
-SQLALCHEMY_DATABASE_URI = os.path.join('sqlite:////appuser/data', DB_NAME)
+SQLALCHEMY_DATABASE_URI = os.path.join('sqlite:////appuser/dbs', DB_NAME)
 SQLALCHEMY_TRACK_MODIFICATIONS = False

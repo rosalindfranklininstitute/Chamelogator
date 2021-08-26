@@ -4,12 +4,9 @@ function check(x) {
 
 // https://stackoverflow.com/a/31405527/11051730
 function sort_chart(chart, datasetIndex) {
-    
-    console.log(chart.data);
 
     var temp_data = chart.data.datasets[datasetIndex].data;
     var temp_labels = chart.data.labels;
-    console.log(temp_labels);
     
     temp_labels.sort(function(a, b) {
         return a - b;
@@ -60,6 +57,8 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
         }
     };
 
+    var delayed;
+
     var config = {
         type: params.type,
         data: params.data,
@@ -93,12 +92,23 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
                             return "[X] " + x_axis + ": " + dataVal;
                         },
                         label: function (tooltipItem) {
-                            console.log(tooltipItem);
                             var datasetLabel = tooltipItem.formattedValue;
                             return "[Y] " + y_axis + ": " + datasetLabel;
                         }
                     }
                 }
+            },
+            animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                        delay = context.dataIndex * 1.02 + context.datasetIndex * 1.01;
+                    }
+                    return delay;
+                },
             },
             scales: {
                 x: {
@@ -122,11 +132,6 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
                         max: 40,
                         beginAtZero:false
                     }
-                }
-            },
-            elements: {
-                point: {
-                    radius: 5
                 }
             },
         },
@@ -166,6 +171,7 @@ function generateChart(x_axis, x_data, y_axis, y_data) {
                 datasets: [{
                     label: y_axis,
                     data: data,
+                    //pointRadius: 20,
                     backgroundColor: "rgb(90, 92, 105, 0.05)",
                     borderColor: "rgb(90, 92, 105, 1)",
                     pointRadius: 3,
@@ -210,25 +216,65 @@ function generateChart(x_axis, x_data, y_axis, y_data) {
 
 };
 
+function create_selects() {
 
-$(document).ready(function() {
+    // For Select boxes
+    axes = ['x', 'y'];
+    var select_div = document.getElementById('selects');
+
+    select_div.innerHTML += "<form><div class='form-group form-inline'>"
+
+    axes.forEach((axis, i) => {
+        
+        var select = "<label for="+axis+" style='font-size: 20px'>"+axis+":&nbsp</label><select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
+
+        df_k.forEach((element, index) => {
+            select += "<option id="+element+" value="+index+">"+element+"</option>";
+        });
+        select += "</select>"
+
+        select_div.innerHTML += select;
+    });
+    select_div.innerHTML += "</div></form>"
+
+    $("select").each(function(){
+
+        var select = $(this);
+
+        select.change(function () {
+
+            if (select.prop('id') == "x") {
+                xaxis = select.find('option:selected').prop('id');
+                xdata = Object.values(df_v[select.val()]);
+            };
+            if (select.prop('id') == "y") {
+                yaxis = select.find('option:selected').prop('id');
+                ydata = Object.values(df_v[select.val()]);
+            };
+
+            if (chart !== null) {
+                chart.destroy();
+                chart = null;
+                $('myChart').empty();
+            };
+            if (xdata !== null && ydata !== null && xdata.length && ydata.length) {
+                chart = generateChart(xaxis, xdata, yaxis, ydata);
+            };
+
+        });
+    }).trigger('change');
+
+};
+
+function fetch_data() {
 
     $.ajax({
         method: 'GET',
         url: '/apis/fetch_df'// + 'chameleon.db'
     })
     .done(function ( data ) {
-
-        var chart = null;
-        var df_k = null;
-        var df_v = null;
-    
-        var xaxis = "";
-        var xdata = null;
-        var yaxis = "";
-        var ydata = null;
-
-        var df = JSON.parse(data);
+        // Declared in data.html.j2 file so jinja2 can substitute it in
+        df = JSON.parse(data);
 
         df_k = Object.keys(df);
         //console.log(df_k)
@@ -239,79 +285,56 @@ $(document).ready(function() {
         df_v.forEach((element, index) => {
             df_v[index] = Object.values(element);
         });
-        
-        // For Select boxes
-        axes = ['x', 'y'];
-        var select_div = document.getElementById('selects');
 
-        select_div.innerHTML += "<form><div class='form-group form-inline'>"
-
-        axes.forEach((axis, i) => {
-            
-            var select = "<label for="+axis+" style='font-size: 20px'>"+axis+":&nbsp</label><select name="+axis+" id="+axis+" class='custom-select custom-select-sm' style='width: 500px; margin-right: 25px; margin-bottom: 15px'>"
-
-            df_k.forEach((element, index) => {
-                select += "<option id="+element+" value="+index+">"+element+"</option>";
-            });
-            select += "</select>"
-
-            select_div.innerHTML += select;
-        });
-        select_div.innerHTML += "</div></form>"
-
-        $("select").each(function(){
-
-            var select = $(this);
-
-            select.change(function () {
-
-                if (select.prop('id') == "x") {
-                    xaxis = select.find('option:selected').prop('id');
-                    xdata = Object.values(df_v[select.val()]);
-                };
-                if (select.prop('id') == "y") {
-                    yaxis = select.find('option:selected').prop('id');
-                    ydata = Object.values(df_v[select.val()]);
-                };
-
-                if (chart !== null) {
-                    chart.destroy();
-                    chart = null;
-                    $('myChart').empty();
-                };
-                if (xdata !== null && ydata !== null && xdata.length && ydata.length) {
-                    chart = generateChart(xaxis, xdata, yaxis, ydata);
-                };
-
-            });
-        }).trigger('change');
-
-
-        $('#save_png').bind('click', function savePNG() {
-            $('#save_png').attr('href', chart.toBase64Image());
-            $('#save_png').attr('download', 'plot.png');
-        });
-
-        $('#export_data').bind('click', function exportCSV() {
-            var data = [];
-
-            console.log(chart.getDatasetMeta(0));
-            // Extract the x and y data from the chart object
-            chart.getDatasetMeta(0).data.forEach((element) => {
-                elem = Object.values(element);
-                data.push({x: elem[0], y: elem[1]});
-            });
-            
-            json_data = JSON.stringify(data);
-            
-            var element = document.createElement('a');
-            element.href = 'data:text/txt;charset=utf-8,' + encodeURI(json_data);
-            element.target = '_blank';
-            element.download = 'export.txt';
-            element.click();
-        });
-
-
-
+        create_selects();
     })
+};
+
+var df;
+var df_k = null;
+var df_v = null;
+
+var chart = null;
+
+var xaxis = "";
+var xdata = null;
+var yaxis = "";
+var ydata = null;
+
+// Call before document.ready
+fetch_data();
+
+
+$(document).ready(function() {
+
+    // while (df_v === null) {
+    //     continue
+    // };
+
+    $('#save_png').bind('click', function savePNG() {
+        $('#save_png').attr('href', chart.toBase64Image());
+        $('#save_png').attr('download', 'plot.png');
+    });
+
+    $('#export_data').bind('click', function exportCSV() {
+        var data = [];
+
+        console.log(chart.getDatasetMeta(0));
+        // Extract the x and y data from the chart object
+        chart.getDatasetMeta(0).data.forEach((element) => {
+            elem = Object.values(element);
+            data.push({x: elem[0], y: elem[1]});
+        });
+        
+        json_data = JSON.stringify(data);
+        
+        axes_titles = "x:" + xaxis + "-y:" + yaxis + ";";
+
+        var element = document.createElement('a');
+        element.href = 'data:text/txt;charset=utf-8,' + encodeURI(axes_titles + json_data);
+        element.target = '_blank';
+        element.download = 'export.txt';
+        element.click();
+    });
+
 });
