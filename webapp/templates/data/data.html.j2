@@ -1,0 +1,98 @@
+{% extends "base.html.j2" %}
+
+{% block heading %}Data{% endblock %}
+
+{% block content %}
+
+
+    <div class="content">
+
+        <h1 class="h3 mb-2 text-gray-800 fadeIn">DataTable</h1>
+        
+        <p class="mb-4 fadeIn">Select the data you want to show in the DataTable and Chart below.</p>
+
+
+        {# <div id="loading"></div> #}
+
+        <!-- Area Chart -->
+        <div class="d-inline-flex">
+            <div class="card shadow fadeIn_slow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Select the options below:</h6>
+                </div>
+                <fieldset id="checkboxes" class="pt-3 form-check"></fieldset>
+            </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-8 col-lg-7 pb-2">
+            <a class="btn btn-primary fadeIn_slowly" href="javascript:void();" id="generate">Generate DataTable</a>
+            <a class="btn btn-primary fadeIn_slowly" href="javascript:void();" id='delete'>Delete from table 1</a>
+            <p></p>
+        </div>
+
+        <div id="loading_spinner">
+        </div>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4 invisible">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">DataTable</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="data_table" width="100%" cellspacing="0">
+                    {# <table width="100%" class="table table-striped table-bordered table-hover" id="data_table"> #}
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                    <!-- /.table -->
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+
+        <div class="d-flex">
+            <div class="card shadow mb-4 invisible">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Plot</h6>
+                </div>
+                <div class="card-body">
+                    <div id="dropdowns" class="d-flex justify-content-center">
+                        {# <select> tags go here #}
+                    </div>
+
+                    {# <img src="data:image/png;base64, {{ plot_url }}"> #}
+                    <canvas id="myChart" style="box-sizing: border-box;" width="500" height="384"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.content -->
+
+
+
+    <!-- jQuery -->
+    <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
+    <!-- charts.js -->
+    <script src={{url_for('static', filename="vendor/chart.js-3.4.1/package/dist/chart.min.js")}}></script>
+    
+    
+    <script src={{url_for('static', filename="js/data.js")}} type="text/javascript"></script>
+   
+
+{% endblock %}
+
+{% block scripts %}
+
+
+   <!-- DataTables JavaScript -->
+   <script src={{url_for('static', filename="vendor/DataTables-1.10.25/js/jquery.dataTables.js")}}></script>
+   {# <script src={{url_for('static', filename="vendor/datatables-plugins/dataTables.bootstrap.js")}}></script> #}
+   <script src={{url_for('static', filename="vendor/Responsive-2.2.9/js/dataTables.responsive.js")}}></script>
+
+{% endblock %}

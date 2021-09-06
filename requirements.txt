@@ -1,0 +1,8 @@
+flask
+flask-SQLAlchemy
+gunicorn
+Jinja2
+numpy
+pandas
+requests
+SQLAlchemy

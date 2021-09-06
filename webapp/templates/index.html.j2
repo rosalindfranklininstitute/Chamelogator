@@ -1,0 +1,156 @@
+{% extends "base.html.j2" %}
+
+{% block heading %}Dashboard{% endblock %}
+
+{% block content %}
+    <!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+
+            <h1 class="h3 mb-2 text-gray-800 fadeIn">Welcome to the Chamelogator Dashboard</h1>
+            
+            <p class="mb-4 fadeIn">A web-app for Data Extraction and Visualisation of the Chameleon instrument and it's sample preparation.</p>
+
+
+            <div class="row pb-4">
+
+                <div class="col-lg-6 pb-3 mb-4">
+                    <div class="card shadow fadeIn_slow col-lg-12 px-0">
+
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">The Chameleon Instrument</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <p>
+                            The Chameleon is a next generation sample preparation instrument for cryo-EM.
+                            </p>
+                            <a href="https://www.sptlabtech.com/products/chameleon/chameleon">> Want to get to know it a bit better?</a>
+
+                            <img class="img-fluid px-3 px-sm-4 my-5 mx-auto d-block"
+                                            src={{url_for('static', filename="main/img/chameleon_instrument_block.png")}}/>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+
+                <div class="col-lg-6 pb-3 mb-4">
+
+                    <div class="row">
+                        
+                        <div class="col-lg-12 mb-4 px-4">
+                            <div class="card border-left-primary fadeIn_slowly shadow mb-4">
+                            <div class="card-body d-flex flex-row">
+
+                            <div class="col-lg-10">
+                                <p>
+                                Want to explore the whole dataset?
+                                </p>
+
+                                <a class="btn btn-primary btn-icon-split text-white shadow" href="/data">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    
+                                    <span class="text">Data</span>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-2 align-self-center">
+                                <i class="fas fa-database fa-3x text-opaque-primary"></i>
+                            </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mb-4 px-4">
+                            <div class="card border-left-primary fadeIn_slower shadow mb-4">
+                            <div class="card-body d-flex flex-row">
+
+                            <div class="col-lg-10">
+                                <p>
+                                Want to compare specific CryoEM sessions?
+                                </p>
+
+                                <a class="btn btn-primary btn-icon-split text-white shadow" href="/compare">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    
+                                    <span class="text">Compare</span>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-2 align-self-center">
+                                <i class="fas fa-clone fa-3x text-opaque-primary"></i>
+                            </div>
+
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mb-4 px-4">
+                            <div class="card border-left-primary fadeIn_slowest shadow mb-4">
+                            <div class="card-body d-flex flex-row">
+
+                            <div class="col-lg-10">
+                                <p>
+                                Want to plot the data to analyze any trends?
+                                </p>
+
+
+
+                                <a class="btn btn-primary btn-icon-split text-white shadow" href="/trends">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    
+                                    <span class="text">Trends</span>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-2 align-self-center">
+                                <i class="fas fa-chart-line fa-3x text-opaque-primary"></i>
+                            </div>
+
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- Main Content -->
+   </div>
+   <!-- /.Content Wrapper -->
+
+    <!-- jQuery -->
+    <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
+    <script>
+
+    var searchbutton = $('#searchbutton').find('button');
+
+    searchbutton.bind("click", function() {window.location = '/data'});
+   
+    </script>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+   <!-- DataTables JavaScript -->
+   <script src={{url_for('static', filename="vendor/DataTables-1.10.25/js/jquery.dataTables.js")}}></script>
+   {# <script src={{url_for('static', filename="vendor/datatables-plugins/dataTables.bootstrap.js")}}></script> #}
+   <script src={{url_for('static', filename="vendor/Responsive-2.2.9/js/dataTables.responsive.js")}}></script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% macro form_field(field) %}
+   {% if field.errors %}
+      <div class="form-group has-error">
+   {% else %}
+      <div class="form-group">
+   {% endif %}
+      {{ field.label(class='control-label') }}
+      {% if field.errors %}
+         {{ field(**kwargs) }}
+         <ul class="errors">{% for error in field.errors %}<li>{{ error|e }}</li>{% endfor %}</ul>
+      {% else %}
+         {{ field(**kwargs) }}
+      {% endif %}
+   </div>
+{% endmacro %}
