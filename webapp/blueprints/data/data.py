@@ -9,6 +9,12 @@ from . import blueprint
 # Setup blueprint route
 @blueprint.route('/data', methods=['GET', 'POST'])
 def show_data():
+    """Function that tells flask to render the data page template when
+    navigating to the /data URL of the webapp.
+
+    Returns:
+        template: A rendered Jinja2 HTML template
+    """
 
     app.logger.info('-> data')
 

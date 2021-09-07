@@ -40,7 +40,7 @@
                             <a id="save_png" class="dropdown-item" href="javascript:void();">Save PNG</a>
                             <div class="dropdown-divider"></div>
                             <a id="export_data" class="dropdown-item">Export Data</a>
-                            <a id="import_data" class="dropdown-item disabled">Import Data</a>
+                            <a id="import_data" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Import Data</a>
                         </div>
                     </div>
                 </div>
@@ -62,11 +62,37 @@
         </div>
    </div>
    <!-- /.Content Wrapper -->
+   
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload data file</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please select the file you want to upload to the plot:</p>
+                    <form enctype="multipart/form-data" id="modal_form_id"  method="post" action="">
+                        <input id="modal_input_id" type="file" name="datafile">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id='import_data_button' type="button" class="btn btn-primary" data-bs-dismiss="modal">Upload file</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src={{url_for('static', filename="vendor/jQuery-3.3.1/jquery-3.3.1.min.js")}}></script>
     <!-- charts.js -->
     <script src={{url_for('static', filename="vendor/chart.js-3.4.1/package/dist/chart.min.js")}}></script>
+    <script src={{url_for('static', filename="vendor/node_modules/hammerjs/hammer.min.js")}}></script>
+    <script src={{url_for('static', filename="vendor/node_modules/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js")}}></script>
+    <!-- dropzone.js -->
+    <script src={{url_for('static', filename="vendor/dropzone-5.7.0/dist/dropzone.js")}}></script>
     
     
     <script src={{url_for('static', filename="js/trends.js")}} type="text/javascript"></script>

@@ -8,6 +8,12 @@ from . import blueprint
 
 @blueprint.route('/trends', methods=['GET', 'POST'])
 def show_trends():
+    """Function that tells flask to render the trends page template when
+    navigating to the /trends URL of the webapp.
+
+    Returns:
+        template: A rendered Jinja2 HTML template
+    """
 
     app.logger.info('-> trends')
 

@@ -1,10 +1,11 @@
 import os
 
-#from Chamelogator.webapp.app import app
-
 DEBUG = True
 
-DB_NAME = 'RFI_chameleon.db'
+DBS = [f for f in os.listdir('/appuser/dbs') if f.endswith(".db")]
+DB_NAME = 'MIT_chameleon.db'
+
+UPLOAD_FOLDER = '/app/webapp/data'
 
 SQLALCHEMY_DATABASE_URI = os.path.join('sqlite:////appuser/dbs', DB_NAME)
 SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -14,6 +14,16 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
+# Install node for certain packages
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y npm
+#RUN npm install npm@latest -g
+
+COPY /webapp/static/vendor/package*.json /app/webapp/static/vendor/
+WORKDIR /app/webapp/static/vendor
+RUN npm install
+ENV PATH /app/webapp/static/vendor/node_modules/.bin:$PATH
+
 WORKDIR /app
 COPY . /app
 

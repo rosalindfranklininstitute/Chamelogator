@@ -1,0 +1,22 @@
+{
+  "name": "Chamelogator",
+  "version": "1.0.0",
+  "description": "Node modules for Chamelogator webapp",
+  "main": "",
+  "dependencies": {
+    "chartjs-plugin-zoom": "^1.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    ""
+  ],
+  "author": "Ollie Copping",
+  "license": "ISC"
+}

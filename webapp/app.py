@@ -23,6 +23,12 @@ from .blueprints import apis, compare, data, trends
 # Set up route to index page
 @app.route("/", methods=["GET", "POST"])
 def index():
+    """Function that tells flask to render the index page template when
+    navigating to the base URL of the webapp.
+
+    Returns:
+        template: A rendered Jinja2 HTML template
+    """
 
     # Render the index template
     return render_template("index.html.j2")
