@@ -1,7 +1,7 @@
 # :lizard: Chamelogator
 ![](https://img.shields.io/badge/python-v3.9-blue) ![](https://img.shields.io/badge/platform-linux--64-lightgrey) ![Crates.io](https://img.shields.io/crates/l/ap)
 ___
-The Chamelogator is a Dockerised Flask web application that provides the easy extraction and visualisation of data from the Chameleon Cryo-EM sample preparation instrument.  
+The Chamelogator is a [Docker](https://www.docker.com/)ised [Flask](https://flask.palletsprojects.com/en/2.0.x/) web application that provides the easy extraction and visualisation of data from the Chameleon Cryo-EM sample preparation instrument.  
 It uses the newest versions of [Bootstrap](https://getbootstrap.com/), [Datatables](https://datatables.net/) and [Chart.js](https://www.chartjs.org/) to provide the most modern features and design.
 ___
 ##### Table of Contents  
