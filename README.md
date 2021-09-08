@@ -5,7 +5,9 @@ The Chamelogator is a Dockerised Flask web application that provides the easy ex
 It uses the newest versions of Bootstrap, Datatables and Chart.js to provide the most modern features and design.
 ___
 ## Getting Started
-...
+The Chamelogator requires:
+- Docker and docker-compose
+- ...
 ___
 ## Installation/Setup  
 As the webapp is Dockerised, it is relatively simple to install.
