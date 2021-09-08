@@ -1,13 +1,14 @@
 # :lizard: Chamelogator
 ![](https://img.shields.io/badge/python-v3.9-blue) ![](https://img.shields.io/badge/platform-linux--64-lightgrey) ![Crates.io](https://img.shields.io/crates/l/ap)
 ___
-The Chamelogator is a Dockerised Flask web application that provides the easy extraction and visualisation of data from the Chameleon Cryo-EM sample preparation instrument.  
-It uses the newest versions of Bootstrap, Datatables and Chart.js to provide the most modern features and design.
+The Chamelogator is a [Docker](https://www.docker.com/)ised [Flask](https://flask.palletsprojects.com/en/2.0.x/) web application that provides the easy extraction and visualisation of data from the Chameleon Cryo-EM sample preparation instrument.  
+It uses the newest versions of [Bootstrap](https://getbootstrap.com/), [Datatables](https://datatables.net/) and [Chart.js](https://www.chartjs.org/) to provide the most modern features and design.
 ___
 ##### Table of Contents  
 - [Getting Started](#getting-started)  
 - [Setup](#setup)
 - [How it works](#how-it-works)
+- [More Information](#more-information)
 ___
 ## Getting Started
 The Chamelogator requires:
@@ -76,3 +77,9 @@ The 'Trends' page allows for the plotting of two sets of data against each other
 The user can also choose to save the current view as a PNG image, export the data in CSV format, and even reupload a CSV file to compare old data with new data.  
 
 ![image2021-9-7_10-30-47](https://user-images.githubusercontent.com/42144984/132496843-52f0bbff-846a-4574-90f2-156c3263803e.png)
+
+___
+## More Information
+
+Here is more information on the Chameleon:  
+[Link to SPTLabtech website](https://www.sptlabtech.com/products/chameleon/chameleon)
