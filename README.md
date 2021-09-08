@@ -76,3 +76,9 @@ The 'Trends' page allows for the plotting of two sets of data against each other
 The user can also choose to save the current view as a PNG image, export the data in CSV format, and even reupload a CSV file to compare old data with new data.  
 
 ![image2021-9-7_10-30-47](https://user-images.githubusercontent.com/42144984/132496843-52f0bbff-846a-4574-90f2-156c3263803e.png)
+
+___
+## More Information
+
+Here is more information on the Chameleon:  
+[Link to SPTLabtech website](https://www.sptlabtech.com/products/chameleon/chameleon)
