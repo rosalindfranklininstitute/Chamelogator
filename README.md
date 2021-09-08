@@ -34,7 +34,7 @@ DB_NAME = 'RFI_chameleon.db'
       - /path/to/Chameleon/db/file:/appuser/dbs/
 ```
 
-4) Build the Docker container using the `docker-compose.yml` file (the `-q` suppresses most of the messages).
+4) Navigate back to the base `Chamelogator` directory and build the Docker container using the docker compose command (the `-q` suppresses most of the messages).
 ```bash
 docker-compose build -q
 ```
