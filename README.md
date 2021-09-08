@@ -4,12 +4,17 @@ ___
 The Chamelogator is a Dockerised Flask web application that provides the easy extraction and visualisation of data from the Chameleon Cryo-EM sample preparation instrument.  
 It uses the newest versions of Bootstrap, Datatables and Chart.js to provide the most modern features and design.
 ___
+##### Table of Contents  
+- [Getting Started](#getting-started)  
+- [Setup](#setup)
+- [How it works](#how-it-works)
+___
 ## Getting Started
 The Chamelogator requires:
 - Docker and docker-compose
 - ...
 ___
-## Installation/Setup  
+## Setup  
 As the webapp is Dockerised, it is relatively simple to install.
 
 1) Clone the Git repo to the location of your choice:  
