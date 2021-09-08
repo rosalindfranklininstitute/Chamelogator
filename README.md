@@ -8,6 +8,7 @@ ___
 - [Getting Started](#getting-started)  
 - [Setup](#setup)
 - [How it works](#how-it-works)
+- [More Information](#more-information)
 ___
 ## Getting Started
 The Chamelogator requires:
