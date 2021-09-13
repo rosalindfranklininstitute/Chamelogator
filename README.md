@@ -36,7 +36,7 @@ DB_NAME = 'RFI_chameleon.db'
 
 4) Navigate back to the base `Chamelogator` directory and build the Docker container using the docker compose command (the `-q` suppresses most of the messages).
 ```bash
-docker-compose build -q
+docker-compose up -d --build
 ```
 
 5) Open a browser and head to `https://localhost:5000` and see if the app is running!
