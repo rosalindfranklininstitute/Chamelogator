@@ -12,5 +12,5 @@ def show_plots():
 
     app.logger.info('-> compare')
 
-    # Render the compare template, passing along the dataframe json
+    # Render the compare template
     return render_template('/compare/compare.html.j2')

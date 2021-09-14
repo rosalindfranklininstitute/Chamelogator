@@ -12,5 +12,5 @@ def show_data():
 
     app.logger.info('-> data')
 
-    # Render the compare template, passing along the dataframe json
+    # Render the compare template
     return render_template('/data/data.html.j2')

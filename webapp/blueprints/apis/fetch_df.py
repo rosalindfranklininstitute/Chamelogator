@@ -9,7 +9,7 @@ from ...models.datadb import (AcceptedGrids, Dispenses, GlowDischarges, Grids,
                               SampleDetails, Sessions, Treatments, db)
 from . import blueprint
 
-
+# Set up route for the flask app
 @blueprint.route('/apis/fetch_df', methods=['GET', 'POST'])
 def fetch_df():
 
@@ -133,7 +133,8 @@ def fetch_df():
         #flash('There was an error with this request', 'danger')
         return Response("There was an error with this request", status=500)
 
-
+# NOT USED BUT WAS GOING TO BE USED TO HELP SORT DATA CHECKBOXES
+# Set up route for flask app
 @blueprint.route('/apis/fetch_df_headers', methods=['GET', 'POST'])
 def fetch_df_headers():
 
