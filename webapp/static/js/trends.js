@@ -462,6 +462,24 @@ function upload_file() {
     })
 };
 
+function limit_y() {
+
+    y_limit_high = document.getElementById("y_limit_high");
+    y_limit_low = document.getElementById("y_limit_low");
+
+    console.log(y_limit_high.value);
+    console.log(y_limit_low.value);
+
+    console.log(chart.config.options.scales.y)
+
+    chart.config.options.scales.y.min = y_limit_low.value;
+    chart.config.options.scales.y.max = y_limit_high.value;
+
+    console.log(chart.config.options.scales.y)
+
+    chart.update();
+    
+};
 
 var df;
 var df_k = null;
@@ -535,5 +553,7 @@ $(document).ready(function() {
     // // })
 
     $('#import_data_button').bind('click', upload_file);
+
+    $('#y_limits_submit').bind('click', limit_y);
 
 });

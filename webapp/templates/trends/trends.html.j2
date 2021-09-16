@@ -69,7 +69,7 @@
 
    
     <div class="col-auto pb-2 px-0">
-        <button id='limits_button' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#limitsModal">Y Limits</button>
+        <button id='y_limits_button' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ylimitsModal">Y Limits</button>
     </div>
    
 
@@ -96,27 +96,35 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="limitsModal" tabindex="-1" aria-labelledby="limitsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ylimitsModal" tabindex="-1" aria-labelledby="ylimitsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="limitsModalLabel">Limit Y Axis</h5>
+                    <h5 class="modal-title" id="ylimitsModalLabel">Limit Y Axis</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p class="mb-1">Please select the y-axis range for the plot:</p>
                     <div class="d-flex flex-row align-items-center">
                         <div>
-                            <input id="limit_high_y" class="mr-4 mb-4">
+                        <form id="y_limits_form" role="form" action="">
+                            {# <label for="y_limit_high" class="form-label">Y High</label> #}
+                            <div class="input-group">
+                                <input id="y_limit_high" name="y_limit_high" type="text" class="form-control mr-4 mb-4" placeholder="High Limit" aria-label="Y Limit High" aria-describedby="basic-addon1">
+                            </div>
                             <br/>
-                            <input id="limit_low_y" class="mr-4">
+                            <div class="input-group">
+                                <input id="y_limit_low" name="y_limit_high" type="text" class="form-control mr-4" placeholder="Low Limit" aria-label="Y Limit Low" aria-describedby="basic-addon1">
+                            </div>
+                        </form>
                         </div>
                         <i class="far fa-chart-bar fa-9x"></i>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id='limits_button' type="button" class="btn btn-primary" data-bs-dismiss="modal">Set Y Limits</button>
+                    <button id='y_limits_submit' type="button" class="btn btn-primary" data-bs-dismiss="modal">Set Y Limits</button>
+                    <button>Test1</button>
                 </div>
             </div>
         </div>
