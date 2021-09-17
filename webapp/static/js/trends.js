@@ -99,6 +99,8 @@ function AddChartJSDataset (axes, data) {
     chart.config.options.scales.y2 = y2;
     chart.update();
 
+    $('remove_data').removeClass('invisible');
+
     // const dsColor = Utils.namedColor(chart.data.datasets.length);
     // const newDataset = {
     //     label: 'Dataset ' + (data.datasets.length + 1),
@@ -110,10 +112,13 @@ function AddChartJSDataset (axes, data) {
     // chart.update();
 };
 
-// function RemoveChartJSDataset () {
-//     chart.data.datasets.pop();
-//     chart.update();
-// };
+function RemoveChartJSDataset () {
+    chart.data.datasets.pop();
+    chart.config.options.scales.pop();
+    chart.update();
+
+    $('remove_data').addClass('invisible');
+};
 
 
 function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
@@ -255,20 +260,6 @@ function updateChart(currentChart, ctx, dataMap, x_axis, y_axis) {
                         beginAtZero:false
                     }
                 },
-                // y2: {
-                //     type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                //     position: 'right',
-                //     reverse: false,
-                //     ticks: {
-                //         min: 28,
-                //         max: 40,
-                //         beginAtZero:false,
-                //         color: CHART_COLORS.secondary
-                //     },
-                //     grid: {
-                //         drawOnChartArea: false // only want the grid lines for one axis to show up
-                //     }
-                // }
             },
         },
         // Boolean - whether or not the chart should be responsive and resize when the browser does.
@@ -553,6 +544,8 @@ $(document).ready(function() {
     // // })
 
     $('#import_data_button').bind('click', upload_file);
+
+    $('remove_data').bind('click', RemoveChartJSDataset)
 
     $('#y_limits_submit').bind('click', limit_y);
 

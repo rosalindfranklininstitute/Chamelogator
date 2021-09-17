@@ -33,16 +33,19 @@
                             <li><a class="dropdown-item" href="#">Separated link</a></li>
                         </ul>
                     </div> #}
-                    <div class="dropdown no-arrow">
-                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-primary-muted"></i>
-                        </button>
-                        <div class="dropdown-menu animated--fade-in_stay" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Options</div>
-                            <a id="save_png" class="dropdown-item" href="javascript:void();">Save PNG</a>
-                            <div class="dropdown-divider"></div>
-                            <a id="export_data" class="dropdown-item">Export Data</a>
-                            <a id="import_data" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Import Data</a>
+                    <div class="d-flex flex-row align-items-center">
+                        <button id="remove_data" class="btn btn-primary btn-sm mr-2 invisible">Remove Dataset</button>
+                        <div class="dropdown no-arrow">
+                            <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-primary-muted"></i>
+                            </button>
+                            <div class="dropdown-menu animated--fade-in_stay" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Options</div>
+                                <a id="save_png" class="dropdown-item" href="javascript:void();">Save PNG</a>
+                                <div class="dropdown-divider"></div>
+                                <a id="export_data" class="dropdown-item">Export Data</a>
+                                <a id="import_data" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Import Data</a>
+                            </div>
                         </div>
                     </div>
                 </div>
